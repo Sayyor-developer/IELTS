@@ -1,0 +1,87 @@
+.sections-container {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.sections-header {
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.mode-title {
+  font-size: 2.5rem;
+  color: #0f172a;
+  margin: 10px 0;
+}
+
+.mode-subtitle {
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+.sections-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.section-card {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.section-card:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: translateX(5px);
+}
+
+.sec-icon-wrapper {
+  font-size: 2rem;
+  margin-right: 20px;
+  background: #f1f5f9;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.sec-info {
+  flex: 1;
+}
+
+.sec-info h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #1e293b;
+}
+
+.sec-info p {
+  margin: 5px 0 0;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: #cbd5e1;
+}
