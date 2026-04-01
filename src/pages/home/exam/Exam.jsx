@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '../../../supabaseClient';
 
 // Komponentlar
@@ -11,76 +11,101 @@ import Writing from './component/writing/Writing';
 import './exam.css';
 
 const Exam = () => {
-  const { mode, section } = useParams();
+  const { mode, section } = useParams(); 
   const navigate = useNavigate();
+  const location = useLocation();
   
+  const sectionsOrder = useMemo(() => ['listening', 'reading', 'writing', 'speaking'], []);
+
+  // State-lar
   const [examData, setExamData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [timeLeft, setTimeLeft] = useState(3600); 
+  const [timeLeft, setTimeLeft] = useState(3600);
 
-  const fetchRandomExam = useCallback(async () => {
+  // URL-dan hozirgi bo'limni aniqlash
+  const currentSection = useMemo(() => section?.toLowerCase() || 'listening', [section]);
+  const activeSectionIndex = useMemo(() => sectionsOrder.indexOf(currentSection), [currentSection, sectionsOrder]);
+
+  const fetchSectionData = useCallback(async (sectionType) => {
     setLoading(true);
+    setExamData(null); // Eski ma'lumotni tozalash
+    
     try {
+      const formattedMode = mode?.toUpperCase() || 'IELTS';
+
       const getRandomPassage = async (level) => {
         const { data, error } = await supabase
           .from('exam_sections')
-          .select(`
-            *,
-            exams!inner(type),
-            questions!section_id(*)
-          `)
-          .eq('exams.type', mode)
-          .eq('section_type', section?.toLowerCase())
-          .eq('difficulty_level', level);
+          .select(`*, questions(*)`)
+          .eq('section_type', sectionType)
+          .eq('difficulty_level', level)
+          .eq('exam_type', formattedMode); // Warning yo'qotildi, filtr ishlatildi
 
         if (error) throw error;
-        if (!data || data.length === 0) return null;
-
-        const randomIndex = Math.floor(Math.random() * data.length);
-        return data[randomIndex];
+        return data && data.length > 0 ? data[Math.floor(Math.random() * data.length)] : null;
       };
 
-      const [p1, p2, p3] = await Promise.all([
+      // 3 xil qiyinlikdagi passage-larni parallel yuklash
+      const results = await Promise.all([
         getRandomPassage(1),
         getRandomPassage(2),
         getRandomPassage(3)
       ]);
 
-      const finalPassages = [p1, p2, p3].filter(p => p !== null);
-      setExamData(finalPassages.length > 0 ? finalPassages : null);
-
+      const finalData = results.filter(p => p !== null);
+      setExamData(finalData);
     } catch (err) {
-      console.error("IELTS tizimi xatosi:", err.message);
+      console.error("Xatolik yuz berdi:", err.message);
+      setExamData(null);
     } finally {
       setLoading(false);
     }
-  }, [mode, section]);
+  }, [mode]);
 
+  // Bo'lim o'zgarganda (URL o'zgarganda) ishlaydi
   useEffect(() => {
-    fetchRandomExam();
-  }, [fetchRandomExam]);
+    fetchSectionData(currentSection);
+    
+    const sectionTimes = { listening: 2400, reading: 3600, writing: 3600, speaking: 900 };
+    setTimeLeft(sectionTimes[currentSection] || 3600);
+  }, [currentSection, fetchSectionData]);
 
-  useEffect(() => {
-    if (!loading && examData && timeLeft > 0) {
-      const timerId = setInterval(() => {
-        setTimeLeft(prevTime => prevTime - 1);
-      }, 1000);
-      return () => clearInterval(timerId);
+  // Keyingi bo'limga o'tish funksiyasi
+  const handleNextSection = useCallback(() => {
+    if (activeSectionIndex < sectionsOrder.length - 1) {
+      const nextSectionName = sectionsOrder[activeSectionIndex + 1];
+      // DIQQAT: App.js marshrutiga moslab /exams (ko'plikda) qilindi
+      navigate(`/exams/${mode}/${nextSectionName}`);
+      window.scrollTo(0, 0);
+    } else {
+      alert("Tabriklaymiz! Barcha bo'limlarni yakunladingiz.");
+      navigate('/'); 
     }
-  }, [loading, examData, timeLeft]);
+  }, [activeSectionIndex, sectionsOrder, mode, navigate]);
+
+  // Taymer mantiqi
+  useEffect(() => {
+    let timerId;
+    if (!loading && examData && timeLeft > 0) {
+      timerId = setInterval(() => setTimeLeft(p => p - 1), 1000);
+    } else if (timeLeft === 0 && examData) {
+      handleNextSection();
+    }
+    return () => clearInterval(timerId);
+  }, [loading, examData, timeLeft, handleNextSection]);
 
   const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+    const min = Math.floor(seconds / 60);
+    const sec = seconds % 60;
+    return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
   };
 
-  if (loading) return <div className="loader-container"><h3>Atmosfera tayyorlanmoqda...</h3></div>;
+  if (loading) return <div className="loader-container"><h3>Navbatdagi bo'lim yuklanmoqda...</h3></div>;
 
-  if (!examData) return (
-    <div className="no-data">
-      <h3>Hozircha bazada yetarli savollar yo'q.</h3>
-      <button onClick={() => navigate(-1)}>Orqaga</button>
+  if (!examData || examData.length === 0) return (
+    <div className="loader-container">
+      <h3>Ma'lumot topilmadi ({currentSection})</h3>
+      <button onClick={() => navigate('/')}>Bosh sahifaga qaytish</button>
     </div>
   );
 
@@ -88,24 +113,29 @@ const Exam = () => {
     <div className="exam-layout-wrapper">
       <div className="exam-top-bar">
         <div className="left-side">
-          <button className="exit-btn" onClick={() => navigate(-1)}>← Exit</button>
-          <span className="exam-tag">{mode} {section?.toUpperCase()}</span>
+          <button className="exit-btn" onClick={() => navigate('/')}>← Exit</button>
+          <span className="exam-tag">{mode?.toUpperCase()} - {currentSection.toUpperCase()}</span>
         </div>
+
         <div className="center-timer">
           <span className={`time-left ${timeLeft < 300 ? 'warning' : ''}`}>
-            Time Left: {formatTime(timeLeft)}
+             Time: {formatTime(timeLeft)}
           </span>   
         </div>
+
         <div className="right-side">
-          <button className="submit-btn" onClick={() => alert("Test yakunlandi!")}>Finish Test</button>
+          <button className="next-section-btn" onClick={handleNextSection}>
+            {activeSectionIndex < sectionsOrder.length - 1 ? 'Next Section →' : 'Finish Test'}
+          </button>
         </div>
       </div>
 
-      <div className="exam-viewport">
-        {section === 'reading' && <Reading data={examData} />}
-        {section === 'listening' && <Listening data={examData} />}
-        {section === 'writing' && <Writing data={examData} />}
-        {section === 'speaking' && <Speaking data={examData} />}
+      {/* MUHIM: key={location.pathname} - bo'lim almashganda komponentni yangilaydi */}
+      <div className="exam-viewport" key={location.pathname}>
+        {currentSection === 'reading' && <Reading data={examData} onComplete={handleNextSection} />}
+        {currentSection === 'listening' && <Listening data={examData} onComplete={handleNextSection} />}
+        {currentSection === 'writing' && <Writing data={examData} onComplete={handleNextSection} />}
+        {currentSection === 'speaking' && <Speaking data={examData} onComplete={handleNextSection} />}
       </div>
     </div>
   );

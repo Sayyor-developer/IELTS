@@ -1,0 +1,486 @@
+.writing-wrapper {
+    max-width: 1100px;
+    /* Biroz kengaytirildi */
+    margin: 0 auto;
+    padding: 10px 20px 20px 20px;
+    height: calc(100vh - 80px);
+    /* Ekran bo'yiga moslash */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Progress bar ixchamroq */
+.writing-progress {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.progress-step {
+    width: 28px;
+    height: 28px;
+    font-size: var(--font-size-14);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    color: #94a3b8;
+}
+
+/* Card - Endi u ancha uzun va sig'imli */
+.essay-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    /* Yumshoqroq burchaklar */
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* Wrapper ichidagi barcha bo'sh joyni egallaydi */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04);
+    overflow-y: auto;
+    /* Ichki skroll */
+}
+
+/* Sarlavhalar va info */
+.essay-info h3 {
+    font-size: var(--font-size-24);
+    color: #1e293b;
+    margin: 10px 0;
+}
+
+.instruction {
+    font-size: var(--font-size-14);
+    color: #64748b;
+    background: #f8fafc;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+/* Savol qismi - Vizual ajralib turadi */
+.question-box {
+    background: #f0f7ff;
+    border-left: 6px solid #3b82f6;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 4px 16px 16px 4px;
+    font-size: var(--font-size-16);    
+    line-height: 1.6;
+    color: #1e3a8a;
+}
+
+/* Textarea - Card uzunligi bilan birga o'sadi */
+.input-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.essay-input {
+    width: 100%;
+    flex: 1;
+    /* Card qancha uzun bo'lsa, bu ham shuncha cho'ziladi */
+    min-height: 400px;
+    /* Kamida 400px joy egallaydi */
+    padding: 25px;
+    border: 2px solid #f1f5f9;
+    border-radius: 16px;
+    background: #fafafa;
+    font-size: var(--font-size-18);
+    line-height: 1.8;
+    resize: none;
+    transition: border 0.3s ease, background 0.3s ease;
+}
+
+.essay-input:focus {
+    outline: none;  
+    border-color: #3b82f6;
+    background: #ffffff;
+}
+
+/* Status va Action qismi card tagida statik */
+.writing-action {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.word-counter {
+    font-size: var(--font-size-16);
+    font-weight: var(--font-weight-600);
+    padding: 8px 16px;
+    border-radius: 10px;
+}
+
+.next-task-btn {
+    padding: 14px 50px;
+    border-radius: 14px;
+    font-size: var(--font-size-16);
+    font-weight: var(--font-weight-700);
+    letter-spacing: 0.5px;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+/* Modal Box */
+.writing-modal {
+    background: #ffffff;
+    width: 90%;
+    max-width: 1100px;
+    height: 85vh;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: modalSlideUp 0.4s ease-out;
+}
+
+@keyframes modalSlideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    padding: 25px 40px;
+    border-bottom: 1px solid #f1f5f9;
+    background: #f8fafc;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #1e293b;
+    font-size: var(--font-size-24);
+}
+
+/* Modal Content (Scrollable) */
+.modal-content {
+    padding: 30px 40px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.review-section {
+    margin-bottom: 40px;
+}
+
+.review-section h4 {
+    color: #3b82f6;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: var(--font-size-14);
+    letter-spacing: 1px;
+}
+
+.review-box {
+    background: #fdfdfd;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;    
+    padding: 20px;
+}
+
+.user-text {
+    font-style: italic;
+    color: #475569;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #e2e8f0;
+    padding-bottom: 15px;
+}
+
+.mistakes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mistake-item {
+    display: block;
+    font-size: var(--font-size-16);
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #f1f5f9;
+}
+
+/* Footer & Close Button */
+.modal-footer {
+    padding: 20px 40px;
+    border-top: 1px solid #f1f5f9;
+    text-align: right;
+    background: #f8fafc;
+}
+
+.close-modal-btn {
+    background: #ef4444;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 10px;
+    border: none;
+    font-weight: var(--font-weight-700);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.close-modal-btn:hover {
+    background: #dc2626;
+    transform: scale(1.05);
+}
+
+/* Layout Settings */
+.writing-wrapper {
+    max-width: 1100px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Stepper */
+.writing-progress {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.progress-step {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-700);
+    color: #94a3b8;
+    border: 2px solid #e2e8f0;
+}
+
+.progress-step.active {
+    background: #3b82f6;
+    color: white;
+    border-color: #2563eb;
+}
+
+.progress-step.completed {
+    background: #10b981;
+    color: white;
+    border-color: #059669;
+}
+
+/* Essay Card */
+.essay-card {
+    background: #fff;
+    border-radius: 24px;
+    border: 1px solid #e2e8f0;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+    /* Ichki skroll */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.level-badge {
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: var(--font-size-12);
+    font-weight: var(--font-weight-800);
+}
+
+.lvl-1 {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.lvl-2 {
+    background: #fffbeb;
+    color: #d97706;
+}
+
+.lvl-3 {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.question-box {
+    background: #f8fafc;
+    border-left: 5px solid #3b82f6;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 0 12px 12px 0;
+    font-size: var(--font-size-16);
+    line-height: 1.6;
+}
+
+.essay-input {
+    width: 100%;
+    flex: 1;
+    min-height: 350px;
+    padding: 20px;
+    border: 2px solid #f1f5f9;
+    border-radius: 12px;
+    font-size: var(--font-size-18);
+    line-height: 1.8;
+    resize: none;
+    font-family: inherit;
+}
+
+/* Action Bar */
+.writing-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+}
+
+.word-counter.success {
+    color: #10b981;
+}
+
+.word-counter.pending {
+    color: #ef4444;
+}
+
+.next-task-btn {
+    padding: 12px 40px;
+    border-radius: 10px;
+    background: #1e293b;
+    color: white;
+    border: none;
+    font-weight: var(--font-weight-700);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.next-task-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* MODAL STYLES */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.writing-modal {
+    background: #fff;
+    width: 90%;
+    max-width: 1000px;
+    height: 85vh;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.modal-content {
+    padding: 30px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.review-box {
+    background: #fdfdfd;
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.err {
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 6px;
+    font-size: var(--font-size-14);
+    border-left: 4px solid;
+}
+
+.err.red {
+    background: #fef2f2;
+    color: #991b1b;
+    border-color: #ef4444;
+}
+
+.err.orange {
+    background: #fffbeb;
+    color: #92400e;
+    border-color: #f59e0b;
+}
+
+.err.blue {
+    background: #eff6ff;
+    color: #1e40af;
+    border-color: #3b82f6;
+}
+
+.close-modal-btn {
+    margin: 20px;
+    padding: 12px 30px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: var(--font-weight-700);
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animated-fade-in {
+    animation: fadeIn 0.4s ease;
+}

@@ -1,138 +1,207 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import './reading.css';
 
 const Reading = ({ data }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [showResult, setShowResult] = useState(false);
 
+  // 1. Ma'lumotni massivga keltirish
   const passages = useMemo(() => {
+    if (!data) return [];
     const dataArray = Array.isArray(data) ? data : [data];
     return [...dataArray].sort((a, b) => (a.difficulty_level || 0) - (b.difficulty_level || 0));
   }, [data]);
 
   const currentPassage = passages[currentIndex];
 
-  // MATNNI SARLAVHA VA TANAGA AJRATISH LOGIKASI
+  // 2. MATNNI ANIQLASH (Xatolik tuzatilgan variant)
   const { displayTitle, displayBody } = useMemo(() => {
-    if (!currentPassage?.passage_text) return { displayTitle: "Reading Passage", displayBody: "" };
-    
-    // Matnni qatorlarga bo'lamiz
-    const lines = currentPassage.passage_text.split('\n').filter(line => line.trim() !== "");
-    
-    // Agar birinchi qator sarlavhaga o'xshash bo'lsa (masalan 100 belgidan kam)
+    if (!currentPassage) return { displayTitle: "Loading...", displayBody: "" };
+
+    // Matnni xavfsiz olish
+    const rawText = currentPassage.content || currentPassage.passage_text || currentPassage.text || "";
+    const title = currentPassage.title || "Reading Passage";
+
+    if (!rawText) {
+      return { displayTitle: title, displayBody: "Matn yuklanmadi..." };
+    }
+
+    // Split qilishdan oldin text borligini yana bir bor tekshiramiz
+    const safeText = String(rawText); 
+    const lines = safeText.split('\n').filter(line => line.trim() !== "");
+
     if (lines.length > 1 && lines[0].length < 100) {
-      return {
-        displayTitle: lines[0],
-        displayBody: lines.slice(1).join('\n')
-      };
+      return { displayTitle: lines[0], displayBody: lines.slice(1).join('\n') };
     }
     
-    // Agar title bazada bo'lsa o'shani ishlatamiz
-    return {
-      displayTitle: currentPassage.title || "Reading Passage " + (currentIndex + 1),
-      displayBody: currentPassage.passage_text
+    return { displayTitle: title, displayBody: safeText };
+  }, [currentPassage]);
+
+  // 3. Savollar yechilganini tekshirish
+  const isCurrentPassageComplete = useMemo(() => {
+    const questions = currentPassage?.questions || [];
+    if (questions.length === 0) return true;
+    return questions.every(
+      q => selectedAnswers[q.id] !== undefined && selectedAnswers[q.id] !== ""
+    );
+  }, [currentPassage, selectedAnswers]);
+
+  useEffect(() => {
+    const pScroll = document.getElementById('passage-scroll');
+    const qScroll = document.getElementById('questions-scroll');
+    if (pScroll) pScroll.scrollTop = 0;
+    if (qScroll) qScroll.scrollTop = 0;
+  }, [currentIndex]);
+
+  // 4. Natijalarni hisoblash (Global raqamlar bilan)
+  const results = useMemo(() => {
+    if (!showResult) return null;
+    let correct = 0;
+    let total = 0;
+    const details = [];
+
+    passages.forEach((p) => {
+      const qs = p.questions || [];
+      qs.sort((a, b) => a.question_number - b.question_number).forEach((q) => {
+        total++;
+        const userAns = selectedAnswers[q.id];
+        const isCorrect = String(userAns).trim().toLowerCase() === String(q.correct_answer).trim().toLowerCase();
+        if (isCorrect) correct++;
+        details.push({
+          num: total,
+          userAnswer: userAns || "Not Answered",
+          correctAnswer: q.correct_answer,
+          isCorrect
+        });
+      });
+    });
+
+    return { 
+      correct, 
+      total, 
+      score: total > 0 ? (Math.round((correct / total) * 9 * 10) / 10) : 0, 
+      details 
     };
-  }, [currentPassage, currentIndex]);
+  }, [showResult, passages, selectedAnswers]);
 
-  const isPassageComplete = () => {
-    if (!currentPassage?.questions) return false;
-    return currentPassage.questions.every(q => selectedAnswers[q.id]);
-  };
-
-  const handleNext = () => {
-    if (isPassageComplete()) {
-      if (currentIndex < passages.length - 1) {
-        setCurrentIndex(prev => prev + 1);
-        const pScroll = document.getElementById('passage-scroll');
-        const qScroll = document.getElementById('questions-scroll');
-        if (pScroll) pScroll.scrollTop = 0;
-        if (qScroll) qScroll.scrollTop = 0;
-      }
-    } else {
-      alert("Please answer all questions to proceed!");
+  const getGlobalNumber = (idx) => {
+    let count = 0;
+    for (let i = 0; i < currentIndex; i++) {
+      count += passages[i].questions?.length || 0;
     }
+    return count + idx + 1;
   };
 
-  if (!currentPassage) return <div className="p-10 text-center">Loading...</div>;
+  if (!currentPassage) return <div className="loader-container"><h3>Loading Reading...</h3></div>;
 
   return (
-    <div className="reading-wrapper" style={{ display: 'flex', height: 'calc(100vh - 70px)', backgroundColor: '#f8fafc', overflow: 'hidden' }}>
-      
-      {/* CHAP TOMON: READING PASSAGE */}
-      <div id="passage-scroll" className="passage-pane" style={{ flex: '1', backgroundColor: '#ffffff', padding: '40px 60px', overflowY: 'auto', borderRight: '2px solid #e2e8f0' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <span style={{ backgroundColor: '#e0f2fe', color: '#0369a1', padding: '4px 12px', borderRadius: '20px', fontSize: '13px', fontWeight: '600', textTransform: 'uppercase' }}>
-            Passage {currentIndex + 1} of {passages.length}
-          </span>
-          
-          {/* Dinamik Sarlavha */}
-          <h1 style={{ fontSize: '32px', fontWeight: '800', color: '#1e293b', marginTop: '15px', marginBottom: '25px', lineHeight: '1.2' }}>
-            {displayTitle}
-          </h1>
-
-          {/* Dinamik Matn Tanasi */}
-          <div style={{ 
-            fontSize: '18px', 
-            lineHeight: '1.8', 
-            color: '#334155', 
-            textAlign: 'justify',
-            whiteSpace: 'pre-wrap' 
-          }}>
+    <div className="reading-wrapper">
+      <div id="passage-scroll" className="passage-pane">
+        <div className="passage-container">
+          <span className="passage-badge">Passage {currentIndex + 1} of {passages.length}</span>
+          <h1 className="passage-title">{displayTitle}</h1>
+          <div className="passage-content" style={{ whiteSpace: 'pre-line' }}>
             {displayBody}
           </div>
         </div>
       </div>
 
-      {/* O'NG TOMON: QUESTIONS (Dizaynga tegmadim) */}
-      <div id="questions-scroll" className="questions-pane" style={{ flex: '1', padding: '40px', overflowY: 'auto' }}>
-        <div style={{ maxWidth: '650px', width: '100%', margin: '0 auto' }}>
-          
-          <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '12px', borderLeft: '5px solid #3b82f6', marginBottom: '30px' }}>
-            <h4 style={{ margin: 0 }}>{currentPassage.instruction || "Answer the questions below"}</h4>
+      <div id="questions-scroll" className="questions-pane">
+        <div className="questions-container">
+          <div className="instruction-box">
+            <h4>{currentPassage.instruction || "Answer the questions below"}</h4>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            {currentPassage.questions?.sort((a, b) => a.question_number - b.question_number).map((q, idx) => {
-              const globalNumber = (currentIndex * 10) + idx + 1;
-              return (
-                <div key={q.id} style={{ backgroundColor: '#fff', padding: '25px', borderRadius: '16px', border: selectedAnswers[q.id] ? '2px solid #3b82f6' : '1px solid #e2e8f0' }}>
-                  <div style={{ display: 'flex', gap: '15px', marginBottom: '18px' }}>
-                    <span style={{ minWidth: '32px', height: '32px', backgroundColor: selectedAnswers[q.id] ? '#3b82f6' : '#f1f5f9', color: selectedAnswers[q.id] ? '#fff' : '#475569', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700' }}>
-                      {globalNumber}
-                    </span>
-                    <p style={{ fontWeight: '600', color: '#1e293b', fontSize: '17px' }}>{q.question_text}</p>
-                  </div>
-
-                  <div style={{ display: 'grid', gap: '10px' }}>
-                    {q.options?.map((opt, i) => (
-                      <label key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px', backgroundColor: selectedAnswers[q.id] === opt ? '#eff6ff' : '#f8fafc', borderRadius: '10px', cursor: 'pointer', border: '1px solid #f1f5f9' }}>
-                        <input 
-                          type="radio" 
-                          name={`q-${q.id}`} 
-                          checked={selectedAnswers[q.id] === opt}
-                          onChange={() => setSelectedAnswers({ ...selectedAnswers, [q.id]: opt })}
-                        />
-                        <span>{opt}</span>
-                      </label>
-                    ))}
-                  </div>
+          <div className="questions-list">
+            {(currentPassage.questions || [])
+              .sort((a, b) => a.question_number - b.question_number)
+              .map((q, idx) => (
+              <div key={q.id} className={`question-card ${selectedAnswers[q.id] ? 'selected' : ''}`}>
+                <div className="question-header">
+                  <span className={`question-number ${selectedAnswers[q.id] ? 'active' : ''}`}>
+                    {getGlobalNumber(idx)}
+                  </span>
+                  <p className="question-text">{q.question_text}</p>
                 </div>
-              )
-            })}
+                
+                <div className="options-grid">
+                  {q.options?.map((opt, i) => (
+                    <label key={i} className={`option-label ${selectedAnswers[q.id] === opt ? 'checked' : ''}`}>
+                      <input 
+                        type="radio" 
+                        name={`q-${q.id}`} 
+                        checked={selectedAnswers[q.id] === opt} 
+                        onChange={() => setSelectedAnswers({ ...selectedAnswers, [q.id]: opt })}
+                        style={{ display: 'none' }}
+                      />
+                      <span>{opt}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div style={{ marginTop: '40px', paddingBottom: '40px', textAlign: 'right' }}>
+          <div className="action-footer">
             {currentIndex < passages.length - 1 ? (
-              <button onClick={handleNext} style={{ backgroundColor: isPassageComplete() ? '#1e293b' : '#cbd5e1', color: '#fff', padding: '14px 40px', borderRadius: '10px', border: 'none', fontWeight: '700', cursor: isPassageComplete() ? 'pointer' : 'not-allowed' }}>
-                Next Passage →
+              <button 
+                className={`next-btn ${!isCurrentPassageComplete ? 'btn-locked' : ''}`} 
+                onClick={() => isCurrentPassageComplete && setCurrentIndex(prev => prev + 1)}
+                disabled={!isCurrentPassageComplete}
+              >
+                {!isCurrentPassageComplete ? "Answer all to continue" : "Next Passage →"}
               </button>
             ) : (
-              <button onClick={() => alert("Test Completed!")} style={{ backgroundColor: '#22c55e', color: '#fff', padding: '14px 40px', borderRadius: '10px', border: 'none', fontWeight: '700' }}>
-                Finish Section
+              <button 
+                className={`finish-btn ${!isCurrentPassageComplete ? 'btn-locked' : ''}`}
+                onClick={() => isCurrentPassageComplete && setShowResult(true)}
+                disabled={!isCurrentPassageComplete}
+              >
+                {!isCurrentPassageComplete ? "Complete all to finish" : "Finish Section"}
               </button>
             )}
           </div>
         </div>
       </div>
+
+      {showResult && results && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2>Reading Results</h2>
+              <button className="close-x" onClick={() => setShowResult(false)}>×</button>
+            </div>
+            <div className="score-summary">
+              <div className="score-card">
+                <h3>{results.score}</h3>
+                <p>IELTS Band</p>
+              </div>
+              <p>{results.correct} out of {results.total} correct</p>
+            </div>
+            <div className="results-table-wrapper">
+              <table className="results-table">
+                <thead>
+                  <tr><th>#</th><th>Res</th><th>Your</th><th>Correct</th></tr>
+                </thead>
+                <tbody>
+                  {results.details.map((item, index) => (
+                    <tr key={index} className={item.isCorrect ? 'row-correct' : 'row-wrong'}>
+                      <td>{item.num}</td>
+                      <td>{item.isCorrect ? '✅' : '❌'}</td>
+                      <td>{item.userAnswer}</td>
+                      <td>{item.correctAnswer}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="modal-footer">
+              <button className="retry-btn" onClick={() => window.location.reload()}>Restart Test</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
