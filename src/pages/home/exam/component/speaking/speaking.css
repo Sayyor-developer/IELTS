@@ -1,0 +1,663 @@
+/* --- Global Speaking Layout --- */
+.speaking-main-layout {
+    display: flex;
+    gap: 30px;
+    padding: 30px;
+    max-width: 1300px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #333;
+    height: calc(100vh - 120px);
+    /* Ota konteyner balandligi */
+    overflow: hidden;
+}
+
+/* --- Loader & Error States --- */
+.speaking-loading,
+.speaking-error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-size: var(--font-size-18);
+    color: #666;
+}
+
+/* --- Chap Tomon: Passage Pane --- */
+.speaking-content-pane {
+    flex: 2;
+    /* 2 hissa joy oladi */
+    overflow-y: auto;
+    /* Agar matn sig'masa skroll bo'ladi */
+    padding-right: 15px;
+    /* Skroll bar uchun joy */
+}
+
+/* --- Speaking Card Style --- */
+.speaking-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid #eaeaea;
+}
+
+.card-header {
+    background: #f8fafc;
+    padding: 20px 30px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.part-indicator {
+    display: inline-block;
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: var(--font-size-14);
+    font-weight: var(--font-weight-600);
+    margin-bottom: 8px;
+}
+
+.part-title {
+    font-size: var(--font-size-25);
+    font-weight: var(--font-weight-700);
+    margin: 0;
+    color: #1e293b;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.instruction-text {
+    font-size: var(--font-size-18);
+    color: #64748b;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* --- Questions List Styling --- */
+.questions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.question-item {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    background: #f1f5f9;
+    padding: 15px 20px;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.question-item:hover {
+    background: #e2e8f0;
+}
+
+.q-number {
+    background: #007bff;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: var(--font-size-14);
+    flex-shrink: 0;
+}
+
+.question-item p {
+    margin: 0;
+    font-size: var(--font-size-18);
+    line-height: 1.5;
+    color: #1e293b;
+}
+
+/* --- Cue Card Styling (Part 2) --- */
+.cue-card-box {
+    background: #fffdf5;
+    border: 2px solid #fde047;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(253, 224, 71, 0.2);
+}
+
+.cue-card-box h4 {
+    margin-top: 0;
+    font-size: var(--font-size-20);
+    color: #a16207;
+}
+
+.cue-card-box p {
+    font-size: var(--font-size-16);
+    color: #854d0e;
+}
+
+.cue-card-box ul {
+    padding-left: 20px;
+    margin: 15px 0;
+}
+
+.cue-card-box li {
+    font-size: var(--font-size-18);
+    color: #1e293b;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.cue-card-note {
+    font-weight: var(--font-weight-600);
+    color: #a16207 !important;
+    margin-bottom: 0 !important;
+}
+
+/* --- O'ng Tomon: Control Pane --- */
+.speaking-control-pane {
+    flex: 1;
+    /* 1 hissa joy oladi */
+    position: sticky;
+    top: 30px;
+    height: fit-content;
+}
+
+.control-panel-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    border: 1px solid #eaeaea;
+    text-align: center;
+}
+
+.control-panel-card h3 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #1e293b;
+    font-size: var(--font-size-20);
+    font-weight: var(--font-weight-700);
+}
+
+/* --- Recorder Display (Timer) --- */
+.recorder-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: #0f172a;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-family: 'Courier New', Courier, monospace;
+    /* Raqamlar tekis turishi uchun */
+    margin-bottom: 20px;
+}
+
+.status-dot {
+    width: 15px;
+    height: 15px;
+    background: #475569;
+    /* Off state */
+    border-radius: 50%;
+}
+
+.status-dot.active {
+    background: #ef4444;
+    /* On state */
+    animation: pulse 1s infinite;
+}
+
+.timer-text {
+    font-size: var(--font-size-25);
+    font-weight: var(--font-weight-700);
+}
+
+.rec-text {
+    color: #ef4444;
+    font-weight: var(--font-weight-700);
+    font-family: sans-serif;
+    font-size: var(--font-size-14)  ;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* --- Recorder Buttons --- */
+.action-buttons {
+    margin-bottom: 25px;
+}
+
+.btn-rec-start,
+.btn-rec-stop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: var(--font-size-18);
+    font-weight: var(--font-weight-600);
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+}
+
+.btn-rec-start {
+    background: #22c55e;
+    color: white;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.btn-rec-start:hover {
+    background: #16a34a;
+}
+
+.btn-rec-stop {
+    background: #ef4444;
+    color: white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-rec-stop:hover {
+    background: #dc2626;
+}
+
+/* --- Audio Preview Section --- */
+.audio-preview-section {
+    background: #f8fafc;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.preview-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    margin-bottom: 10px;
+    font-weight: var(--font-weight-600);
+}
+
+.styled-audio-player {
+    width: 100%;
+    height: 35px;
+}
+
+/* --- Error/Permission Message --- */
+.mic-error {
+    color: #ef4444;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: var(--font-size-14);
+    margin-bottom: 20px;
+}
+
+/* --- Navigation Buttons --- */
+.navigation-section {
+    margin-top: 15px;
+    border-top: 1px solid #eaeaea;
+    padding-top: 20px;
+}
+
+.btn-next {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    background: #0f172a;
+    color: white;
+    font-size: var(--font-size-18);
+    font-weight: var(--font-weight-600);
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+}
+
+.btn-next:hover {
+    background: #1e293b;
+}
+
+/* --- Global Speaking Layout --- */
+.speaking-main-layout {
+    display: flex;
+    gap: 30px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #1e293b;
+    min-height: calc(100vh - 100px);
+}
+
+/* --- Chap Tomon: Savollar --- */
+.speaking-content-pane {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.speaking-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f1f5f9;
+    overflow: hidden;
+}
+
+.card-header {
+    background: #f8fafc;
+    padding: 24px 30px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.part-indicator {
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 4px 14px;
+    border-radius: 30px;
+    font-size: var(--font-size-12);
+    font-weight: var(--font-weight-700);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.part-title {
+    font-size: var(--font-size-20);
+    font-weight: var(--font-weight-800);
+    margin: 0;
+    color: #0f172a;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.question-item {
+    display: flex;
+    gap: 15px;
+    background: #f8fafc;
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+
+.question-item:hover {
+    border-color: #cbd5e1;
+    background: #fff;
+}
+
+.q-number {
+    background: #e2e8f0;
+    color: #475569;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-700);
+    font-size: var(--font-size-12);
+    flex-shrink: 0;
+}
+
+/* Cue Card (Part 2) */
+.cue-card-box {
+    background: #fffbeb;
+    border: 2px dashed #f59e0b;
+    border-radius: 16px;
+    padding: 25px;
+    margin-top: 10px;
+}
+
+/* --- O'ng Tomon: Control Pane --- */
+.speaking-control-pane {
+    flex: 1;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+.control-panel-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    border: 1px solid #f1f5f9;
+}
+
+/* Recorder UI */
+.recorder-display {
+    background: #0f172a;
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.timer-text {
+    font-size: var(--font-size-25);
+    font-weight: var(--font-weight-700);
+    color: #fff;
+    font-family: 'Monaco', monospace;
+}
+
+.btn-rec-start,
+.btn-rec-stop,
+.btn-next {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: var(--font-size-16);
+    font-weight: var(--font-weight-700);
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.btn-rec-start {
+    background: #10b981;
+    color: white;
+}
+
+.btn-rec-stop {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-next {
+    background: #1e293b;
+    color: white;
+    margin-top: 15px;
+}
+
+/* --------------------------------------------------
+   RESPONSIVE DESIGN (Media Queries)
+-------------------------------------------------- */
+
+/* Tabletlar uchun (992px dan kichik) */
+@media (max-width: 992px) {
+    .speaking-main-layout {
+        flex-direction: column;
+        /* Ustma-ust tushadi */
+        padding: 20px;
+    }
+
+    .speaking-control-pane {
+        position: static;
+        /* Sticky o'chadi */
+        width: 100%;
+    }
+}
+
+/* Mobil telefonlar uchun (380px gacha va biroz tepasi) */
+@media (max-width: 500px) {
+    .speaking-main-layout {
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .card-header {
+        padding: 20px;
+    }
+
+    .part-title {
+        font-size: var(--font-size-20);
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .question-item {
+        padding: 12px;
+        font-size: var(--font-size-14);
+    }
+
+    /* Rekorder panelini ekranning pastiga yopishtirib qo'yamiz (Sticky Mobile) */
+    .speaking-control-pane {
+        position: sticky;
+        bottom: 10px;
+        z-index: 100;
+    }
+
+    .control-panel-card {
+        padding: 15px;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .timer-text {
+        font-size: var(--font-size-20);
+    }
+
+    .recorder-display {
+        padding: 10px;
+        margin-bottom: 10px;
+        flex-direction: row;
+        /* Mobil ekranda joy tejash uchun yonma-yon */
+        justify-content: space-around;
+    }
+
+    .btn-rec-start,
+    .btn-rec-stop,
+    .btn-next {
+        padding: 12px;
+        font-size: var(--font-size-14);
+    }
+
+    .cue-card-box {
+        padding: 15px;
+    }
+}
+
+/* Juda kichik ekranlar (380px va past) */
+@media (max-width: 380px) {
+    .part-title {
+        font-size: var(--font-size-18);
+    }
+
+    .q-number {
+        width: 22px;
+        height: 22px;
+        font-size: var(--font-size-12);
+    }
+
+    .btn-rec-start,
+    .btn-rec-stop {
+        font-size: var(--font-size-14);
+    }
+}
+
+/* 1. Savollar o'ralgan oq kartochkani ichki qismini cheklaymiz */
+.card-body {
+    padding: 20px;
+    /* Kichik ekranlarda savollar qismi balandligini cheklaymiz */
+    max-height: 250px;
+    overflow-y: auto;
+    /* TEPADAN PASTGA SKROLL SHU YERDA ISHLAYDI */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 2. Skrollbar ko'rinishi (ingichka va xunuk bo'lmasligi uchun) */
+.card-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+.card-body::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+/* 3. Mobil ekranda (380px atrofida) umumiy layoutni moslash */
+@media (max-width: 500px) {
+    .speaking-main-layout {
+        height: 100vh;
+        /* Ekran bo'yi bilan cheklaymiz */
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        overflow: hidden;
+        /* Butun sahifa skroll bo'lmasligi kerak */
+    }
+
+    .speaking-content-pane {
+        flex: 1;
+        /* Savollar qismi qolgan bo'sh joyni oladi */
+        overflow: hidden;
+    }
+
+    .speaking-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Savollar aynan mana shu joyda skroll bo'lishi shart */
+    .questions-list {
+        overflow-y: auto;
+        max-height: 200px;
+        /* 3-savol ko'rinishi uchun joy ochamiz */
+        padding-right: 5px;
+    }
+}

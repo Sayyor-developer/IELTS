@@ -1,60 +1,56 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
+// import { examData } from '../../../../../data/mockData'; // BU QATORNI O'CHIRAMIZ
 import './reading.css';
 
-const Reading = ({ data }) => {
+const Reading = ({ data, onComplete }) => { // Data endi props orqali keladi
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showResult, setShowResult] = useState(false);
 
-  // 1. Ma'lumotni massivga keltirish
+  // 1. Ma'lumotni props'dan kelgan data'dan olish (XATO SHU YERDA EDI)
   const passages = useMemo(() => {
-    if (!data) return [];
-    const dataArray = Array.isArray(data) ? data : [data];
-    return [...dataArray].sort((a, b) => (a.difficulty_level || 0) - (b.difficulty_level || 0));
-  }, [data]);
+    // Agar ota komponentdan data kelsa, o'shani ishlatamiz
+    const sourceData = data || []; 
+    if (sourceData.length === 0) return [];
+    return [...sourceData].sort((a, b) => (a.difficulty_level || 0) - (b.difficulty_level || 0));
+  }, [data]); // examData emas, data'ga bog'laymiz
 
   const currentPassage = passages[currentIndex];
 
-  // 2. MATNNI ANIQLASH (Xatolik tuzatilgan variant)
+  // 2. Matn va Sarlavhani ajratish mantiqi (O'ZGARMADI)
   const { displayTitle, displayBody } = useMemo(() => {
     if (!currentPassage) return { displayTitle: "Loading...", displayBody: "" };
-
-    // Matnni xavfsiz olish
-    const rawText = currentPassage.content || currentPassage.passage_text || currentPassage.text || "";
+    
+    const rawText = currentPassage.content || currentPassage.passage_text || "";
     const title = currentPassage.title || "Reading Passage";
 
-    if (!rawText) {
-      return { displayTitle: title, displayBody: "Matn yuklanmadi..." };
-    }
+    if (!rawText) return { displayTitle: title, displayBody: "Matn yuklanmadi..." };
 
-    // Split qilishdan oldin text borligini yana bir bor tekshiramiz
-    const safeText = String(rawText); 
-    const lines = safeText.split('\n').filter(line => line.trim() !== "");
-
+    const lines = String(rawText).split('\n').filter(line => line.trim() !== "");
     if (lines.length > 1 && lines[0].length < 100) {
       return { displayTitle: lines[0], displayBody: lines.slice(1).join('\n') };
     }
     
-    return { displayTitle: title, displayBody: safeText };
+    return { displayTitle: title, displayBody: rawText };
   }, [currentPassage]);
 
-  // 3. Savollar yechilganini tekshirish
+  // 3. Savollar to'liqligini tekshirish (O'ZGARMADI)
   const isCurrentPassageComplete = useMemo(() => {
     const questions = currentPassage?.questions || [];
     if (questions.length === 0) return true;
-    return questions.every(
-      q => selectedAnswers[q.id] !== undefined && selectedAnswers[q.id] !== ""
-    );
+    return questions.every(q => selectedAnswers[q.id] !== undefined && selectedAnswers[q.id] !== "");
   }, [currentPassage, selectedAnswers]);
 
-  useEffect(() => {
-    const pScroll = document.getElementById('passage-scroll');
-    const qScroll = document.getElementById('questions-scroll');
-    if (pScroll) pScroll.scrollTop = 0;
-    if (qScroll) qScroll.scrollTop = 0;
-  }, [currentIndex]);
+  // 4. Global savol raqamini hisoblash (O'ZGARMADI)
+  const getGlobalNumber = (idx) => {
+    let count = 0;
+    for (let i = 0; i < currentIndex; i++) {
+      count += passages[i].questions?.length || 0;
+    }
+    return count + idx + 1;
+  };
 
-  // 4. Natijalarni hisoblash (Global raqamlar bilan)
+  // 5. Natijalarni hisoblash (O'ZGARMADI)
   const results = useMemo(() => {
     if (!showResult) return null;
     let correct = 0;
@@ -85,18 +81,13 @@ const Reading = ({ data }) => {
     };
   }, [showResult, passages, selectedAnswers]);
 
-  const getGlobalNumber = (idx) => {
-    let count = 0;
-    for (let i = 0; i < currentIndex; i++) {
-      count += passages[i].questions?.length || 0;
-    }
-    return count + idx + 1;
-  };
-
+  // Yuklanish holati tekshiruvi
+  if (passages.length === 0) return <div className="loader-container"><h3>No Reading Data Found...</h3></div>;
   if (!currentPassage) return <div className="loader-container"><h3>Loading Reading...</h3></div>;
 
   return (
     <div className="reading-wrapper">
+      {/* DIZAYNGA TEGilmadi - Sening JSX'ing turibdi */}
       <div id="passage-scroll" className="passage-pane">
         <div className="passage-container">
           <span className="passage-badge">Passage {currentIndex + 1} of {passages.length}</span>
@@ -165,6 +156,7 @@ const Reading = ({ data }) => {
         </div>
       </div>
 
+      {/* MODAL QISMI (O'ZGARMADI) */}
       {showResult && results && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -175,7 +167,7 @@ const Reading = ({ data }) => {
             <div className="score-summary">
               <div className="score-card">
                 <h3>{results.score}</h3>
-                <p>IELTS Band</p>
+                <p>Band Score</p>
               </div>
               <p>{results.correct} out of {results.total} correct</p>
             </div>

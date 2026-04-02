@@ -1,0 +1,133 @@
+.login-wrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8fafc;
+    font-family: 'Inter', sans-serif;
+}
+
+.login-card {
+    background: #ffffff;
+    padding: 45px;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04);
+    border: 1px solid #f1f5f9;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.logo-circle {
+    width: 60px;
+    height: 60px;
+    background: #3b82f6;
+    color: white;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 900;
+    margin: 0 auto 15px;
+}
+
+.login-header h1 {
+    font-size: 28px;
+    color: #1e293b;
+    margin: 0;
+}
+
+.login-header h1 span {
+    color: #3b82f6;
+}
+
+.login-header p {
+    color: #64748b;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    padding-left: 4px;
+}
+
+.input-field input {
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 2px solid #f1f5f9;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+}
+
+.input-field input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.05);
+}
+
+.login-submit-btn {
+    background: #1e293b;
+    color: white;
+    padding: 16px;
+    border-radius: 14px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    margin-top: 10px;
+}
+
+.login-submit-btn:hover {
+    background: #0f172a;
+    transform: translateY(-2px);
+}
+
+.login-submit-btn:active {
+    transform: translateY(0);
+}
+
+.login-footer {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animated-fade-in {
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}

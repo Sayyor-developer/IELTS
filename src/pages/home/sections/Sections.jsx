@@ -10,8 +10,8 @@ const Sections = () => {
   const modeConfigs = {
     IELTS: [
       { id: 'listening', title: 'Listening', icon: '🎧', desc: '40 questions, 30 min' },
-      { id: 'reading', title: 'Reading', icon: '📖', desc: '40 questions, 60 min' },
-      { id: 'writing', title: 'Writing', icon: '✍️', desc: '2 tasks, 60 min' },
+      { id: 'reading', title: 'Reading', icon: '📖', desc: '30 questions, 60 min' },
+      { id: 'writing', title: 'Writing', icon: '✍️', desc: '3 tasks, 60 min' },
       { id: 'speaking', title: 'Speaking', icon: '🎤', desc: '3 parts, 11-14 min' }
     ],
     CEFR: [

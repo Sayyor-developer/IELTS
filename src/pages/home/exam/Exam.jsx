@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { supabase } from '../../../supabaseClient';
+import { examData as mockData } from '../../../data/mockData';
 
-// Komponentlar
 import Reading from './component/reading/Reading';
 import Listening from './component/listening/Listening';
 import Speaking from './component/speaking/Speaking';
@@ -17,82 +16,85 @@ const Exam = () => {
   
   const sectionsOrder = useMemo(() => ['listening', 'reading', 'writing', 'speaking'], []);
 
-  // State-lar
-  const [examData, setExamData] = useState(null);
+  const [currentExamData, setCurrentExamData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [timeLeft, setTimeLeft] = useState(3600);
 
-  // URL-dan hozirgi bo'limni aniqlash
   const currentSection = useMemo(() => section?.toLowerCase() || 'listening', [section]);
   const activeSectionIndex = useMemo(() => sectionsOrder.indexOf(currentSection), [currentSection, sectionsOrder]);
 
-  const fetchSectionData = useCallback(async (sectionType) => {
-    setLoading(true);
-    setExamData(null); // Eski ma'lumotni tozalash
-    
-    try {
-      const formattedMode = mode?.toUpperCase() || 'IELTS';
+  const finishExam = useCallback(() => {
+    const readingAnswers = JSON.parse(localStorage.getItem('reading_ans_session')) || {};
+    const listeningAnswers = JSON.parse(localStorage.getItem('listening_ans_session')) || {};
 
-      const getRandomPassage = async (level) => {
-        const { data, error } = await supabase
-          .from('exam_sections')
-          .select(`*, questions(*)`)
-          .eq('section_type', sectionType)
-          .eq('difficulty_level', level)
-          .eq('exam_type', formattedMode); // Warning yo'qotildi, filtr ishlatildi
+    // Ballarni hisoblash logikasi
+    const rCount = Object.keys(readingAnswers).length;
+    const lCount = Object.keys(listeningAnswers).length;
 
-        if (error) throw error;
-        return data && data.length > 0 ? data[Math.floor(Math.random() * data.length)] : null;
-      };
+    // IELTS Band Score simulyatsiyasi
+    const calculateBand = (count) => {
+      if (count >= 30) return 7.5;
+      if (count >= 23) return 6.5;
+      if (count >= 15) return 5.5;
+      return 4.5;
+    };
 
-      // 3 xil qiyinlikdagi passage-larni parallel yuklash
-      const results = await Promise.all([
-        getRandomPassage(1),
-        getRandomPassage(2),
-        getRandomPassage(3)
-      ]);
+    const rScore = calculateBand(rCount);
+    const lScore = calculateBand(lCount);
+    const wScore = 3.0;
+    const sScore = 2.5;
+    const overall = Math.round(((rScore + lScore + wScore + sScore) / 4) * 2) / 2;
 
-      const finalData = results.filter(p => p !== null);
-      setExamData(finalData);
-    } catch (err) {
-      console.error("Xatolik yuz berdi:", err.message);
-      setExamData(null);
-    } finally {
-      setLoading(false);
-    }
-  }, [mode]);
+    const finalScores = {
+      reading: rScore.toFixed(1),
+      listening: lScore.toFixed(1),
+      writing: wScore.toFixed(1),
+      speaking: sScore.toFixed(1),
+      overall: overall.toFixed(1)
+    };
 
-  // Bo'lim o'zgarganda (URL o'zgarganda) ishlaydi
-  useEffect(() => {
-    fetchSectionData(currentSection);
-    
-    const sectionTimes = { listening: 2400, reading: 3600, writing: 3600, speaking: 900 };
-    setTimeLeft(sectionTimes[currentSection] || 3600);
-  }, [currentSection, fetchSectionData]);
+    localStorage.removeItem('reading_ans_session');
+    localStorage.removeItem('listening_ans_session');
 
-  // Keyingi bo'limga o'tish funksiyasi
+    // Natijaga o'tish
+    navigate('/result', { state: { scores: finalScores } });
+  }, [navigate]);
+
   const handleNextSection = useCallback(() => {
     if (activeSectionIndex < sectionsOrder.length - 1) {
       const nextSectionName = sectionsOrder[activeSectionIndex + 1];
-      // DIQQAT: App.js marshrutiga moslab /exams (ko'plikda) qilindi
       navigate(`/exams/${mode}/${nextSectionName}`);
       window.scrollTo(0, 0);
     } else {
-      alert("Tabriklaymiz! Barcha bo'limlarni yakunladingiz.");
-      navigate('/'); 
+      finishExam();
     }
-  }, [activeSectionIndex, sectionsOrder, mode, navigate]);
+  }, [activeSectionIndex, sectionsOrder, mode, navigate, finishExam]);
 
-  // Taymer mantiqi
+  const fetchSectionData = useCallback((sectionType) => {
+    setLoading(true);
+    setTimeout(() => {
+      const modeData = mockData[mode?.toLowerCase()];
+      const data = modeData ? modeData[sectionType] : null;
+      setCurrentExamData(data);
+      setLoading(false);
+    }, 500);
+  }, [mode]);
+
+  useEffect(() => {
+    fetchSectionData(currentSection);
+    const sectionTimes = { listening: 1800, reading: 3600, writing: 3600, speaking: 840 };
+    setTimeLeft(sectionTimes[currentSection] || 3600);
+  }, [currentSection, fetchSectionData]);
+
   useEffect(() => {
     let timerId;
-    if (!loading && examData && timeLeft > 0) {
+    if (!loading && currentExamData && timeLeft > 0) {
       timerId = setInterval(() => setTimeLeft(p => p - 1), 1000);
-    } else if (timeLeft === 0 && examData) {
+    } else if (timeLeft === 0 && currentExamData) {
       handleNextSection();
     }
     return () => clearInterval(timerId);
-  }, [loading, examData, timeLeft, handleNextSection]);
+  }, [loading, currentExamData, timeLeft, handleNextSection]);
 
   const formatTime = (seconds) => {
     const min = Math.floor(seconds / 60);
@@ -100,14 +102,8 @@ const Exam = () => {
     return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
   };
 
-  if (loading) return <div className="loader-container"><h3>Navbatdagi bo'lim yuklanmoqda...</h3></div>;
-
-  if (!examData || examData.length === 0) return (
-    <div className="loader-container">
-      <h3>Ma'lumot topilmadi ({currentSection})</h3>
-      <button onClick={() => navigate('/')}>Bosh sahifaga qaytish</button>
-    </div>
-  );
+  if (loading) return <div className="loader-container"><h3>Loading...</h3></div>;
+  if (!currentExamData) return <div className="loader-container"><h3>Ma'lumot topilmadi.</h3></div>;
 
   return (
     <div className="exam-layout-wrapper">
@@ -116,13 +112,11 @@ const Exam = () => {
           <button className="exit-btn" onClick={() => navigate('/')}>← Exit</button>
           <span className="exam-tag">{mode?.toUpperCase()} - {currentSection.toUpperCase()}</span>
         </div>
-
         <div className="center-timer">
           <span className={`time-left ${timeLeft < 300 ? 'warning' : ''}`}>
-             Time: {formatTime(timeLeft)}
+               Time: {formatTime(timeLeft)}
           </span>   
         </div>
-
         <div className="right-side">
           <button className="next-section-btn" onClick={handleNextSection}>
             {activeSectionIndex < sectionsOrder.length - 1 ? 'Next Section →' : 'Finish Test'}
@@ -130,12 +124,11 @@ const Exam = () => {
         </div>
       </div>
 
-      {/* MUHIM: key={location.pathname} - bo'lim almashganda komponentni yangilaydi */}
       <div className="exam-viewport" key={location.pathname}>
-        {currentSection === 'reading' && <Reading data={examData} onComplete={handleNextSection} />}
-        {currentSection === 'listening' && <Listening data={examData} onComplete={handleNextSection} />}
-        {currentSection === 'writing' && <Writing data={examData} onComplete={handleNextSection} />}
-        {currentSection === 'speaking' && <Speaking data={examData} onComplete={handleNextSection} />}
+        {currentSection === 'reading' && <Reading data={currentExamData} onComplete={handleNextSection} />}
+        {currentSection === 'listening' && <Listening data={currentExamData} onComplete={handleNextSection} />}
+        {currentSection === 'writing' && <Writing data={currentExamData} onComplete={handleNextSection} />}
+        {currentSection === 'speaking' && <Speaking data={currentExamData} onComplete={handleNextSection} />}
       </div>
     </div>
   );
