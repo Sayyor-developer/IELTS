@@ -30,27 +30,39 @@ function App() {
     <div className="App">
       <ToastContainer position="top-right" autoClose={2500} />
       
+      {/* Faqat user bo'lsa Header ko'rinadi */}
       {user && <Header user={user} onLogout={handleLogout} />}
       
       <Routes>
-        {/* Testga kirish uchun login shart emas */}
-        <Route path="/" element={<Home />} />
-        <Route path="/sections/:mode" element={<Sections />} />
-        <Route path="/exams/:mode/:section" element={<Exam />} />
-
-        {/* Login sahifasi: Agar user bo'lsa, avtomatik natijaga o'tadi */}
+        {/* 1. LOGIN SAHIFASI: Agar user bo'lsa Home'ga otadi, bo'lmasa Login'ni ko'rsatadi */}
         <Route 
           path="/login" 
-          element={!user ? <Login onLoginSuccess={handleLoginSuccess} /> : <Navigate to="/result" replace />} 
+          element={!user ? <Login onLoginSuccess={handleLoginSuccess} /> : <Navigate to="/" replace />} 
         />
 
-        {/* NATIJA: Faqat user bo'lsa ko'rsatadi, bo'lmasa Login (Lead Form) ga otadi */}
+        {/* 2. HIMOYALANGAN YO'LLAR: Agar user bo'lsa sahifa ochiladi, bo'lmasa /login'ga otadi */}
+        <Route 
+          path="/" 
+          element={user ? <Home /> : <Navigate to="/login" replace />} 
+        />
+        
+        <Route 
+          path="/sections/:mode" 
+          element={user ? <Sections /> : <Navigate to="/login" replace />} 
+        />
+        
+        <Route 
+          path="/exams/:mode/:section" 
+          element={user ? <Exam /> : <Navigate to="/login" replace />} 
+        />
+
         <Route 
           path="/result" 
           element={user ? <Result /> : <Navigate to="/login" replace />} 
         />
 
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* 3. NOTO'G'RI LINKLAR: Login holatiga qarab yo'naltiradi */}
+        <Route path="*" element={<Navigate to={user ? "/" : "/login"} replace />} />
       </Routes>
     </div>
   );
