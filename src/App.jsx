@@ -1,53 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import './App.css';
 import Header from './components/header/Header';
 import Home from "./pages/home/Home";
 import Sections from './pages/home/sections/Sections';
 import Exam from './pages/home/exam/Exam';
 import Result from './pages/home/exam/result/Result';
-import Login from './pages/home/login/Login'; // Login sahifasini qo'shdik
+import Login from './pages/home/login/Login';
 
 function App() {
-  // LocalStorage dan foydalanuvchini tekshiramiz (Supabase Auth o'rniga)
-  const user = JSON.parse(localStorage.getItem('user'));
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem('user');
+    return saved ? JSON.parse(saved) : null;
+  });
+
+  const handleLoginSuccess = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+  };
 
   return (
     <div className="App">
-      <ToastContainer position="top-right" autoClose={3000} />
-
-      {/* Header faqat foydalanuvchi kirgan bo'lsa ko'rinishi mumkin yoki doimiy */}
-      <Header user={user} />
-
+      <ToastContainer position="top-right" autoClose={2500} />
+      
+      {user && <Header user={user} onLogout={handleLogout} />}
+      
       <Routes>
-        {/* Login sahifasi */}
-        <Route path="/login" element={<Login />} />
+        {/* Testga kirish uchun login shart emas */}
+        <Route path="/" element={<Home />} />
+        <Route path="/sections/:mode" element={<Sections />} />
+        <Route path="/exams/:mode/:section" element={<Exam />} />
 
-        {/* Asosiy sahifalar - Himoyalangan (Protected) */}
-        <Route
-          path="/"
-          element={user ? <Home /> : <Navigate to="/login" />}
+        {/* Login sahifasi: Agar user bo'lsa, avtomatik natijaga o'tadi */}
+        <Route 
+          path="/login" 
+          element={!user ? <Login onLoginSuccess={handleLoginSuccess} /> : <Navigate to="/result" replace />} 
         />
 
-        <Route
-          path="/sections/:mode"
-          element={user ? <Sections /> : <Navigate to="/login" />}
+        {/* NATIJA: Faqat user bo'lsa ko'rsatadi, bo'lmasa Login (Lead Form) ga otadi */}
+        <Route 
+          path="/result" 
+          element={user ? <Result /> : <Navigate to="/login" replace />} 
         />
 
-        <Route
-          path="/exams/:mode/:section"
-          element={user ? <Exam /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/result"
-          element={user ? <Result /> : <Navigate to="/login" />}
-        />
-
-        {/* Noto'g'ri URL kiritilsa Home ga qaytaradi */}
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
   );

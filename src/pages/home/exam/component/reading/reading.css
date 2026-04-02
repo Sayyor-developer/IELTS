@@ -1,510 +1,430 @@
-/* Reading.css */
+/* Prefiks: ielts-reading- */
 
-.reading-wrapper {
+.ielts-reading-container {
     display: flex;
-    height: calc(100vh - 70px);
-    background-color: #f8fafc;
-    overflow: hidden;
-    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    background: #f4f7f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Chap tomon: Matn qismi */
-.passage-pane {
+.ielts-reading-passage-pane {
     flex: 1;
-    background-color: #ffffff;
-    padding: 40px 60px;
     overflow-y: auto;
-    border-right: 2px solid #e2e8f0;
-}
-
-.passage-container {
-    max-width: 800px;
-    margin: 10px auto;
-}
-
-.passage-badge {
-    background-color: #e0f2fe;
-    color: #0369a1;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: var(--font-size-12);
-    font-weight: var(--font-weight-700);
-    text-transform: uppercase;
-    display: inline-block;
-    margin-bottom: 10px;
-}
-
-.passage-title {
-    font-size: var(--font-size-24);
-    font-weight: var(--font-weight-800);
-    color: #1e293b;
-    margin: 15px 0 25px 0;
-    line-height: 1.2;
-}
-
-.passage-content {
-    font-size: var(--font-size-18);
-    line-height: 1.9;
-    color: #334155;
-    text-align: justify;
-    white-space: pre-wrap;
-    /* Enterlarni saqlaydi */
-}
-
-/* O'ng tomon: Savollar qismi */
-.questions-pane {
-    flex: 1;
+    background: #ffffff;
     padding: 40px;
-    overflow-y: auto;
+    border-right: 2px solid #e1e8ed;
 }
 
-.questions-container {
-    max-width: 650px;
-    width: 100%;
+.ielts-reading-passage-content {
+    max-width: 800px;
     margin: 0 auto;
 }
 
-.instruction-box {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    border-left: 5px solid #3b82f6;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.question-card {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 16px;
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-    border: 1px solid #e2e8f0;
-}
-
-.question-card.selected {
-    border: 2px solid #3b82f6;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
-}
-
-.question-header {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 18px;
-}
-
-.question-number {
-    min-width: 36px;
-    height: 36px;
-    background-color: #f1f5f9;
-    color: #475569;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: var(--font-weight-800);
-}
-
-.question-number.active {
-    background-color: #3b82f6;
-    color: #fff;
-}
-
-.question-text {
-    font-weight: var(--font-weight-600);
-    color: #1e293b;
-    font-size: var(--font-size-17);
-    margin: 0;
-}
-
-/* Variantlar */
-.options-grid {
-    display: grid;
-    gap: 12px;
-}
-
-.option-label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 15px;
-    background-color: #f8fafc;
-    border-radius: 12px;
-    cursor: pointer;
-    border: 1px solid #f1f5f9;
-    transition: background 0.2s ease;
-}
-
-.option-label:hover {
-    background-color: #f1f5f9;
-}
-
-.option-label.checked {
-    background-color: #eff6ff;
-    border-color: #3b82f6;
-}
-
-/* Tugmalar */
-.action-footer {
-    margin-top: 40px;
-    padding-bottom: 60px;
-    text-align: right;
-}
-
-.next-btn {
-    background-color: #1e293b;
-    color: #fff;
-    padding: 16px 45px;
-    border-radius: 12px;
-    border: none;
-    font-weight: var(--font-weight-700);
-    font-size: var(--font-size-16);
-    cursor: pointer;
-    transition: opacity 0.3s;
-}
-
-.next-btn:disabled {
-    background-color: #cbd5e1;
-    cursor: not-allowed;
-}
-
-.finish-btn {
-    background-color: #22c55e;
-    color: #fff;
-    padding: 16px 45px;
-    border-radius: 12px;
-    border: none;
-    font-weight: var(--font-weight-700);
-    font-size: var(--font-size-16);
-    cursor: pointer;
-}
-
-/* MODAL OVERLAY */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    backdrop-filter: blur(5px);
-}
-
-/* MODAL CONTENT */
-.modal-content {
-    background: white;
-    width: 90%;
-    max-width: 800px;
-    max-height: 85vh;
+.ielts-reading-badge {
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 5px 12px;
     border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
-
-.modal-header {
-    padding: 20px;
-    background: #f8f9fa;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-}
-
-.close-x {
-    background: none;
-    border: none;
-    font-size: var(--font-size-25);
-    cursor: pointer;
-    color: #666;
-}
-
-/* SCORE SECTION */
-.score-summary {
-    padding: 20px;
-    text-align: center;
-    background: #fff;
-}
-
-.score-card {
-    background: #4f46e5;
-    color: white;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin: 0 auto 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.score-card h3 {
-    font-size: var(--font-size-25);
-    margin: 0;
-}
-
-.score-card p {
     font-size: var(--font-size-12);
-    margin: 0;
+    font-weight: var(--font-weight-600);
 }
 
-.stat-row {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    font-size: var(--font-size-16);
+.ielts-reading-title {
+    font-size: var(--font-size-25);
+    margin: 20px 0;
+    color: #2c3e50;
+}
+
+.ielts-reading-text-body {
+    font-size: var(--font-size-18);
+    line-height: 1.8;
     color: #444;
+    white-space: pre-line;
 }
 
-.text-success {
-    color: #10b981;
-}
-
-/* TABLE SECTION */
-.results-table-wrapper {
+.ielts-reading-questions-pane {
     flex: 1;
     overflow-y: auto;
-    padding: 0 20px;
+    padding: 40px;
 }
 
-.results-table {
-    width: 100%;
-    border-collapse: collapse;
+.ielts-reading-questions-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.ielts-reading-instruction {
+    background: #fff9c4;
+    padding: 10px 15px;
+    border-radius: 5px;
     margin-bottom: 20px;
+    font-style: italic;
+    border-left: 5px solid #fbc02d;
 }
 
-.results-table th {
-    position: sticky;
-    top: 0;
-    background: #f8f9fa;
-    padding: 12px;
-    text-align: left;
-    border-bottom: 2px solid #dee2e6;
-    font-size: var(--font-size-14);
-}
-
-.results-table td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-    font-size: 14px;
-}
-
-.row-correct {
-    background-color: #f0fdf4;
-}
-
-.row-wrong {
-    background-color: #fef2f2;
-}
-
-/* FOOTER */
-.modal-footer {
-    padding: 15px;
-    border-top: 1px solid #eee;
-    text-align: center;
-}
-
-.retry-btn {
-    background: #4f46e5;
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: var(--font-weight-600);
+.ielts-reading-q-card {
+    background: #fff;
+    border: 1px solid #d1d9e0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
     transition: 0.3s;
 }
 
-.retry-btn:hover {
-    background: #4338ca;
+.ielts-reading-q-selected {
+    border-color: #2196f3;
+    box-shadow: 0 4px 10px rgba(33, 150, 243, 0.1);
 }
 
-/* Bloklangan tugma stili */
-.next-btn:disabled,
-.finish-btn:disabled {
-    background-color: #cbd5e1 !important;
-    /* Kulrang rang */
-    color: #64748b !important;
-    cursor: not-allowed !important;
-    transform: none !important;
-    box-shadow: none !important;
-    opacity: 0.8;
-}
-
-/* Tugma ustiga tekst qo'shish uchun qo'shimcha animatsiya (ixtiyoriy) */
-.btn-locked {
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-/* Agar tugma aktiv bo'lsa, chiroyli hover effekti */
-.next-btn:not(:disabled):hover {
-    background-color: #4338ca;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
-}
-
-.finish-btn:not(:disabled):hover {
-    background-color: #059669;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-}
-
-/* ASOSIY KONTEYNER */
-.reading-wrapper {
+.ielts-reading-q-header {
     display: flex;
-    height: calc(100vh - 60px);
-    /* Top bar'dan qolgan joy */
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.ielts-reading-q-num {
+    background: #2c3e50;
+    color: #fff;
+    min-width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: var(--font-size-12);
+}
+
+.ielts-reading-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ielts-reading-opt-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.ielts-reading-opt-label input {
+    display: none;
+}
+
+.ielts-reading-opt-checked {
+    background: #e3f2fd;
+    border-color: #2196f3;
+    font-weight: bold;
+}
+
+.ielts-reading-footer {
+    margin-top: 30px;
+}
+
+.ielts-reading-btn {
     width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: var(--font-size-16);
+    font-weight: var(--font-weight-600);
+    cursor: pointer;
+}
+
+.ielts-reading-btn-next {
+    background: #2196f3;
+    color: #fff;
+}
+
+.ielts-reading-btn-finish {
+    background: #4caf50;
+    color: #fff;
+}
+
+.ielts-reading-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Modal */
+.ielts-reading-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.ielts-reading-modal-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.ielts-reading-table-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+    margin: 20px 0;
+}
+
+.ielts-reading-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ielts-reading-table th,
+.ielts-reading-table td {
+    padding: 10px;
+    border: 1px solid #eee;
+    text-align: center;
+}
+
+.ielts-reading-row-ok {
+    background: #e8f5e9;
+}
+
+.ielts-reading-row-no {
+    background: #ffebee;
+}
+
+.ielts-reading-btn-close {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ielts-reading- prefiksi bilan */
+
+.ielts-reading-container {
+    display: flex;
+    height: 100vh;
+    /* Ekran bo'yi bilan cheklaymiz */
+    background: #f4f7f9;
     overflow: hidden;
+    /* Asosiy konteyner scroll bo'lmasligi kerak */
+}
+
+/* Savollar turadigan o'ng taraf */
+.ielts-reading-questions-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* Vertikal joylashuv */
+    height: 100%;
     background: #f8fafc;
 }
 
-/* CHAP TOMON - MATN */
-.passage-pane {
+/* Savollar ro'yxati - faqat shu qism scroll bo'ladi */
+.ielts-reading-list {
+    flex: 1;
+    /* Qolgan hamma joyni egallaydi */
+    overflow-y: auto;
+    /* Faqat savollar scroll bo'ladi */
+    padding: 20px 40px;
+    /* Ichki masofa */
+}
+
+/* Savollar konteyneri ichidagi instruksiya */
+.ielts-reading-instruction {
+    margin: 20px 40px 10px 40px;
+    background: #fff9c4;
+    padding: 12px 15px;
+    border-left: 5px solid #fbc02d;
+    border-radius: 4px;
+    font-size: var(--font-size-14);
+    color: #5d4037;
+}
+
+/* Tugmalar bloki - doim pastda turadi */
+.ielts-reading-footer {
+    padding: 20px 40px;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.03);
+    z-index: 10;
+}
+
+/* Tugmalar stili */
+.ielts-reading-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: var(--font-size-16);
+    font-weight: var(--font-weight-600);
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.ielts-reading-btn-next {
+    background: #2563eb;
+    color: white;
+}
+
+.ielts-reading-btn-next:hover {
+    background: #1d4ed8;
+}
+
+.ielts-reading-btn-finish {
+    background: #16a34a;
+    color: white;
+}
+
+.ielts-reading-btn:disabled {
+    background: #cbd5e1;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+/* Passage qismi (chap taraf) o'zgarmadi, lekin balandligini aniqlashtiramiz */
+.ielts-reading-passage-pane {
     flex: 1;
     overflow-y: auto;
-    padding: 30px;
     background: white;
+    padding: 40px;
+    border-right: 2px solid #e2e8f0;
+    height: 100%;
+}
+
+/* --- ASOSIY KONTEYNER --- */
+.ielts-reading-container {
+    display: flex;
+    height: 100vh;
+    background: #f4f7f9;
+    overflow: hidden;
+}
+
+/* --- DESKTOP VA PLANSHTET (1024px dan yuqori) --- */
+.ielts-reading-passage-pane {
+    flex: 1;
+    overflow-y: auto;
+    background: white;
+    padding: 40px;
     border-right: 2px solid #e2e8f0;
 }
 
-/* O'NG TOMON - SAVOLLAR */
-.questions-pane {
+.ielts-reading-questions-pane {
     flex: 1;
-    overflow-y: auto;
-    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-/* --------------------------------------------------- */
-/* RESPONSIVE QISMI (768px va undan kichik - Planshet/Mobil) */
-/* --------------------------------------------------- */
-@media (max-width: 768px) {
-    .reading-wrapper {
+.ielts-reading-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 40px;
+}
+
+/* --- MOBILE RESPONSIVE (1024px dan kichik barcha ekranlar uchun) --- */
+@media (max-width: 1024px) {
+    .ielts-reading-container {
         flex-direction: column;
-        /* Ustma-ust tushadi */
+        /* Ustma-ust joylashuv */
         overflow-y: auto;
-        /* Umumiy scroll bo'ladi */
+        /* Butun sahifa scroll bo'ladi */
         height: auto;
     }
 
-    .passage-pane,
-    .questions-pane {
+    .ielts-reading-passage-pane,
+    .ielts-reading-questions-pane {
         flex: none;
         width: 100%;
         height: auto;
         overflow: visible;
-        /* Ichki scrollni o'chiramiz */
-        padding: 20px 15px;
     }
 
-    .passage-pane {
+    .ielts-reading-passage-pane {
         border-right: none;
-        border-bottom: 8px solid #f1f5f9;
-        /* Ikkala qism orasini ajratish */
+        border-bottom: 2px solid #e2e8f0;
+        padding: 20px;
     }
 
-    .passage-title {
-        font-size: var(--font-size-20) !important;
+    .ielts-reading-list {
+        padding: 15px;
+        overflow: visible;
     }
 
-    .passage-content {
-        font-size: var(--font-size-16) !important;
+    .ielts-reading-footer {
+        position: sticky;
+        bottom: 0;
+        width: 100%;
+        padding: 15px;
+        background: white;
+        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* --- EXTREME MOBILE (380px gacha bo'lgan ekranlar uchun maxsus) --- */
+@media (max-width: 380px) {
+    .ielts-reading-title {
+        font-size: var(--font-size-20);
+        /* Sarlavha kichrayadi */
+        margin: 15px 0;
+    }
+
+    .ielts-reading-text-body {
+        font-size: var(--font-size-16);
+        /* Matn o'qishga qulay bo'lishi uchun biroz kichraydi */
         line-height: 1.6;
     }
 
-    /* Savollar ro'yxati mobilga moslashishi */
-    .question-card {
-        padding: 15px !important;
-        margin-bottom: 15px !important;
+    .ielts-reading-passage-pane {
+        padding: 15px;
     }
 
-    .options-grid {
-        grid-template-columns: 1fr !important;
-        /* Variantlar bittadan chiqadi */
-        gap: 8px !important;
+    .ielts-reading-q-card {
+        padding: 15px;
+        /* Savol kartochkasi ixchamlashadi */
+        margin-bottom: 12px;
     }
 
-    .option-label {
-        padding: 12px !important;
-        font-size: var(--font-size-14) !important;
-    }
-}
-
-/* --------------------------------------------------- */
-/* JUDA KICHIK EKRANLAR (380px gacha) */
-/* --------------------------------------------------- */
-@media (max-width: 380px) {
-
-    .passage-pane,
-    .questions-pane {
-        padding: 15px 10px;
-    }
-
-    .passage-title {
-        font-size: var(--font-size-18) !important;
-    }
-
-    .passage-badge {
-        font-size: var(--font-size-12);
-        padding: 2px 8px;
-    }
-
-    .question-header {
-        flex-direction: row;
-        /* Raqam va matn yonma-yon */
-        align-items: flex-start;
+    .ielts-reading-q-header {
         gap: 10px;
     }
 
-    .question-number {
-        min-width: 28px !important;
-        height: 28px !important;
-        font-size: var(--font-size-12) !important;
+    .ielts-reading-q-num {
+        min-width: 24px;
+        height: 24px;
+        font-size: var(--font-size-12);
     }
 
-    .question-text {
-        font-size: var(--font-size-14) !important;
+    .ielts-reading-opt-label {
+        padding: 8px 10px;
+        font-size: var(--font-size-14);
+        /* Variantlar kichrayadi */
     }
 
-    /* Natija Modali uchun ham responsive */
-    .modal-content {
-        width: 95% !important;
-        max-height: 90vh !important;
+    .ielts-reading-instruction {
+        margin: 10px 15px;
+        font-size: var(--font-size-14);
+        padding: 8px;
     }
 
-    .score-card {
-        width: 80px !important;
-        height: 80px !important;
+    .ielts-reading-btn {
+        padding: 12px;
+        font-size: var(--font-size-14);
+        /* Tugma juda katta bo'lib ketmasligi uchun */
     }
 
-    .score-card h3 {
-        font-size: var(--font-size-25) !important;
+    /* Modal ham kichik ekranga moslashadi */
+    .ielts-reading-modal-box {
+        width: 95%;
+        padding: 15px;
     }
 
-    .results-table td,
-    .results-table th {
-        padding: 8px 5px !important;
-        font-size: var(--font-size-12) !important;
+    .ielts-reading-modal-box h2 {
+        font-size: var(--font-size-18);
     }
-}
-
-/* ACTION FOOTER (Tugmalar joylashuvi) */
-.action-footer {
-    margin-top: 25px;
-    padding-bottom: 40px;
-}
-
-.next-btn,
-.finish-btn {
-    width: 100%;
-    /* Mobil ekranda tugma to'liq eni bo'ylab */
-    padding: 14px !important;
-    font-size: var(--font-size-16) !important;
 }

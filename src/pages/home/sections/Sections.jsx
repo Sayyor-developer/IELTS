@@ -19,7 +19,6 @@ const Sections = () => {
       { id: 'reading', title: 'Reading', icon: '📖', desc: '35 questions' },
       { id: 'writing', title: 'Writing', icon: '✍️', desc: '2 tasks' },
       { id: 'speaking', title: 'Speaking', icon: '🎤', desc: 'Interview' },
-      { id: 'grammar', title: 'Grammar & Vocab', icon: '📚', desc: 'Lexical competence' } // CEFR-da ko'p bo'ladi
     ]
   };
 

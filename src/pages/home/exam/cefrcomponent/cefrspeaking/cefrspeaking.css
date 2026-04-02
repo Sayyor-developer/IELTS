@@ -1,0 +1,205 @@
+.sp-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f8fafc;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+
+.sp-header {
+    height: 60px;
+    background: #1e293b;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.sp-nav-inner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sp-indicator {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: #334155;
+    color: #94a3b8;
+}
+
+.sp-indicator.active {
+    background: #ef4444;
+    color: white;
+    animation: pulse 1.5s infinite;
+}
+
+.sp-body {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Chap tomondagi panel */
+.sp-left-panel {
+    flex: 1.2;
+    background: white;
+    border-right: 1px solid #e2e8f0;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.sp-badge {
+    color: #2563eb;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.sp-title {
+    margin: 10px 0 30px;
+    font-size: 28px;
+    color: #0f172a;
+}
+
+.sp-questions-box {
+    background: #f1f5f9;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.sp-q-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #334155;
+}
+
+.q-num {
+    color: #2563eb;
+    font-weight: 900;
+}
+
+/* O'ng tomondagi panel */
+.sp-right-panel {
+    flex: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: #f8fafc;
+}
+
+.sp-control-card {
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+}
+
+.sp-timer-circle {
+    width: 180px;
+    height: 180px;
+    border: 4px solid #e2e8f0;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 40px;
+    background: white;
+}
+
+.sp-time-val {
+    font-size: 40px;
+    font-weight: 200;
+    color: #0f172a;
+}
+
+.sp-time-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.sp-main-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.2s;
+}
+
+.sp-main-btn.start {
+    background: #2563eb;
+    color: white;
+}
+
+.sp-main-btn.stop {
+    background: #ef4444;
+    color: white;
+}
+
+.sp-submit-btn {
+    margin-top: 40px;
+    width: 100%;
+    padding: 14px;
+    background: #0f172a;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Responsive 380px */
+@media (max-width: 850px) {
+    .sp-body {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .sp-left-panel,
+    .sp-right-panel {
+        flex: none;
+        width: 100%;
+        overflow: visible;
+    }
+
+    .sp-left-panel {
+        padding: 20px;
+    }
+
+    .sp-timer-circle {
+        width: 140px;
+        height: 140px;
+        margin-bottom: 20px;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,148 @@
+/* Container & Layout */
+.writing-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f8fafc;
+    font-family: 'Inter', sans-serif;
+}
+
+.writing-header {
+    background: #1e293b;
+    color: white;
+    padding: 15px 20px;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.writing-main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Task & Editor Sections */
+.task-section,
+.editor-section {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.task-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.difficulty-tag {
+    background: #e2e8f0;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.writing-area {
+    width: 100%;
+    height: 60%;
+    padding: 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    line-height: 1.6;
+    resize: none;
+    transition: border-color 0.2s;
+}
+
+.writing-area:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: white;
+}
+
+.editor-status {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.word-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.word-badge.pending {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.word-badge.success {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+/* Action Button */
+.action-area {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.next-step-btn {
+    background: #2563eb;
+    color: white;
+    padding: 14px 40px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.next-step-btn:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+
+/* RESPONSIVE (380px gacha) */
+@media (max-width: 850px) {
+    .writing-main {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .task-section,
+    .editor-section {
+        overflow-y: visible;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .writing-area {
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 400px) {
+    .task-title {
+        font-size: 18px;
+    }
+
+    .header-content {
+        font-size: 13px;
+    }
+
+    .next-step-btn {
+        width: 100%;
+    }
+}
