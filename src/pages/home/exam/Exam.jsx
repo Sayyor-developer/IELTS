@@ -46,8 +46,8 @@ const Exam = () => {
       // CEFR mantiqi
       const rScore = Math.min(30, rCount * 1.5);
       const lScore = Math.min(30, lCount * 1.5);
-      const wScore = 12; 
-      const sScore = 12; 
+      const wScore = 10; 
+      const sScore = 10; 
       const overall = Math.round(rScore + lScore + wScore + sScore);
 
       finalScores = {
