@@ -1,133 +1,148 @@
-.login-wrapper {
-    height: 100vh;
+/* login.css */
+
+/* Asosiy konteyner - sahifani markazga keltirish */
+.ielts-login-container {
     display: flex;
-    align-items: center;
     justify-content: center;
-    background-color: #f8fafc;
-    font-family: 'Inter', sans-serif;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
 }
 
-.login-card {
+/* Login kartasi */
+.ielts-login-card {
     background: #ffffff;
-    padding: 45px;
-    border-radius: 30px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 420px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04);
-    border: 1px solid #f1f5f9;
+    max-width: 400px;
+    transition: transform 0.3s ease;
 }
 
-.login-header {
+.ielts-login-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Sarlavha qismi */
+.ielts-login-header {
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
-.logo-circle {
-    width: 60px;
-    height: 60px;
-    background: #3b82f6;
-    color: white;
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    font-weight: 900;
-    margin: 0 auto 15px;
-}
-
-.login-header h1 {
+.ielts-login-header h1 {
+    color: #333;
     font-size: 28px;
-    color: #1e293b;
-    margin: 0;
-}
-
-.login-header h1 span {
-    color: #3b82f6;
-}
-
-.login-header p {
-    color: #64748b;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-}
-
-.input-field {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.input-field label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #475569;
-    padding-left: 4px;
-}
-
-.input-field input {
-    padding: 14px 18px;
-    border-radius: 12px;
-    border: 2px solid #f1f5f9;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    background: #f8fafc;
-}
-
-.input-field input:focus {
-    outline: none;
-    border-color: #3b82f6;
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.05);
-}
-
-.login-submit-btn {
-    background: #1e293b;
-    color: white;
-    padding: 16px;
-    border-radius: 14px;
-    border: none;
-    font-size: 16px;
     font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.ielts-login-header p {
+    color: #777;
+    font-size: 14px;
+}
+
+/* Input guruhlari */
+.ielts-input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.ielts-input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.ielts-input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    /* Padding hisobiga kengayib ketmasligi uchun */
+}
+
+.ielts-input-group input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
+}
+
+/* Kirish tugmasi */
+.ielts-login-submit {
+    width: 100%;
+    padding: 14px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s, background 0.3s;
+    transition: background 0.3s ease, transform 0.2s ease;
     margin-top: 10px;
 }
 
-.login-submit-btn:hover {
-    background: #0f172a;
-    transform: translateY(-2px);
+.ielts-login-submit:hover {
+    background: #5a67d8;
+    transform: scale(1.02);
 }
 
-.login-submit-btn:active {
-    transform: translateY(0);
+.ielts-login-submit:active {
+    transform: scale(0.98);
 }
 
-.login-footer {
-    margin-top: 25px;
-    text-align: center;
-    font-size: 12px;
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-wrapper input {
+    width: 100%;
+    padding-right: 45px !important;
+    /* Ikonka uchun joy */
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #94a3b8;
+    /* Chiroyli kulrang */
+    transition: color 0.2s ease;
+    padding: 0;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.password-toggle-btn:hover {
+    color: #6366f1;
+    /* Fokus bo'lganda ko'k rang */
 }
 
-.animated-fade-in {
-    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+.password-toggle-btn svg {
+    display: block;
+}
+
+
+/* Mobil qurilmalar uchun moslashuvchanlik */
+@media (max-width: 480px) {
+    .ielts-login-card {
+        padding: 30px 20px;
+    }
+
+    .ielts-login-header h1 {
+        font-size: 24px;
+    }
 }
