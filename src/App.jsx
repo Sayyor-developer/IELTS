@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { FloatButton, Modal, QRCode } from 'antd'; // AntD komponentlari
+import { QrcodeOutlined } from '@ant-design/icons'; // QR kod belgisi
 import 'react-toastify/dist/ReactToastify.css';
 
 import Header from './components/header/Header';
@@ -13,7 +15,6 @@ import Login from './pages/home/login/Login';
 import './App.css';
 
 function App() {
-  // Brauzer yopilsa o'chib ketadigan sessionStorage'dan o'qiymiz
   const [user, setUser] = useState(() => {
     try {
       const saved = sessionStorage.getItem('user'); 
@@ -23,8 +24,10 @@ function App() {
     }
   });
 
+  // QR Kod modalini boshqarish uchun state
+  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
+
   const handleLoginSuccess = (userData) => {
-    // Ma'lumotni faqat joriy sessiya uchun saqlaymiz
     sessionStorage.setItem('user', JSON.stringify(userData));
     setUser(userData);
   };
@@ -53,6 +56,40 @@ function App() {
 
         <Route path="*" element={<Navigate to={user ? "/" : "/login"} replace />} />
       </Routes>
+
+      {/* Faqat foydalanuvchi kirgan bo'lsa, ekranning chetida QR kod tugmasi chiqadi */}
+      {user && (
+        <>
+          <FloatButton
+            icon={<QrcodeOutlined />}
+            type="primary"
+            style={{ right: 24, bottom: 24 }}
+            onClick={() => setIsQRModalOpen(true)}
+            tooltip={<div>Share QR Code</div>}
+          />
+          
+          <Modal
+            title="IELTS MODE AI - QR Code"
+            open={isQRModalOpen}
+            onOk={() => setIsQRModalOpen(false)}
+            onCancel={() => setIsQRModalOpen(false)}
+            footer={null}
+            centered
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', padding: '20px' }}>
+              <QRCode 
+                value="https://ielts-olive-three.vercel.app" 
+                size={250}
+                color="#1677ff"
+                status="active"
+              />
+              <p style={{ textAlign: 'center', color: '#666' }}>
+                Mobil qurilma orqali skanerlang va mashqlarni davom ettiring!
+              </p>
+            </div>
+          </Modal>
+        </>
+      )}
     </div>
   );
 }
