@@ -21,7 +21,7 @@
 
 .exam-tag {
   margin-left: 15px;
-  font-weight: 700;
+  font-weight: var(--font-weight-700);
   background: #3b82f6;
   padding: 4px 10px;
   border-radius: 4px;
@@ -101,7 +101,7 @@
   padding: 10px 15px;
   background: #fff;
   border-bottom: 1px solid #e2e8f0;
-  gap: 10px;
+  gap: var(--gap-10);
 }
 
 /* Media Query - 380px gacha bo'lgan qurilmalar uchun */
@@ -140,10 +140,11 @@
   .exit-btn {
     padding: 4px 4px;
     font-size: var(--font-size-12);
+    margin-top: 12px;
   }
 
   .exam-tag {
-    font-size: 11px;
+    font-size: var(--font-size-12);
     padding: 2px 6px;
     white-space: nowrap;
   }
@@ -161,6 +162,7 @@
   .submit-all-btn {
     padding: 6px 10px;
     font-size: var(--font-size-12);
+    margin-top: 15px;
   }
 
   /* Viewport mobil uchun balandlikni to'g'irlash */

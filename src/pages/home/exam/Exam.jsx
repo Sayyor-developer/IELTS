@@ -16,6 +16,10 @@ import CefrWriting from './cefrcomponent/cefrwriting/Cefrwriting';
 
 import './exam.css';
 
+// ? icons
+import { GoArrowLeft } from "react-icons/go";
+
+
 const Exam = () => {
   const { mode, section } = useParams(); 
   const navigate = useNavigate();
@@ -148,8 +152,9 @@ const Exam = () => {
     <div className="exam-layout-wrapper">
       <div className="exam-top-bar">
         <div className="left-side">
-          <button className="exit-btn" onClick={() => navigate('/')}>← Exit</button>
-          <span className="exam-tag">{mode?.toUpperCase()} - {currentSection.toUpperCase()}</span>
+          <button className="exit-btn" onClick={() => navigate('/')}><GoArrowLeft />
+ Exit</button>
+ 
         </div>
         <div className="center-timer">
           <span className={`time-left ${timeLeft < 300 ? 'warning' : ''}`}>
