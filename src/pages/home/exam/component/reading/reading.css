@@ -314,6 +314,227 @@
     border-right: 2px solid #e2e8f0;
 }
 
+/* Asosiy konteyner balandligini ekranga moslash */
+.ielts-reading-container {
+    display: flex;
+    height: 90vh;
+    /* Ekranning 90% qismini egallaydi */
+    overflow: hidden;
+    /* Umumiy sahifa scroll bo'lmasligi uchun */
+}
+
+/* Matn turadigan chap tomon */
+.ielts-reading-passage-pane {
+    flex: 1;
+    overflow-y: auto;
+    /* FAQAT shu qism scroll bo'lishi shart */
+    padding: 20px;
+    background: #f9f9f9;
+    border-right: 2px solid #ddd;
+}
+
+/* Savollar turadigan o'ng tomon */
+.ielts-reading-questions-pane {
+    flex: 1;
+    overflow-y: auto;
+    /* Savollar ham mustaqil scroll bo'lishi kerak */
+    padding: 20px;
+}
+
+/* Matn ichidagi bo'shliqlarni saqlash */
+.ielts-reading-text-body p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: var(--font-size-18);
+}
+
+/* Tanlangan radio tugma stili */
+.ielts-reading-opt-label.checked {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
+/* Radio inputni o'zini yashirib qo'yish (chiroyli ko'rinishi uchun) */
+.ielts-reading-opt-label input[type="radio"] {
+    display: none;
+}
+
+/* Modal va jadval stillari */
+.ielts-reading-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.ielts-reading-modal-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Javob yoziladigan zona uchun umumiy konteyner */
+.ielts-reading-answer-zone {
+    margin-top: 15px;
+    width: 100%;
+}
+
+/* Bo'sh joyni to'ldirish uchun input stili */
+.ielts-reading-input {
+    width: 100%;
+    max-width: 400px;
+    /* Haddan tashqari cho'zilib ketmasligi uchun */
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 2px solid #d1d5db;
+    /* Kulrang chegara */
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    background-color: #ffffff;
+    color: #1f2937;
+}
+
+/* Inputga fokus bo'lgandagi holat (bosilganda) */
+.ielts-reading-input:focus {
+    border-color: #2563eb;
+    /* Ko'k rang */
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    /* Yengil ko'k effekt */
+    background-color: #f8faff;
+}
+
+/* Input ichidagi placeholder stili */
+.ielts-reading-input::placeholder {
+    color: #9ca3af;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+/* Agar savolga javob yozilgan bo'lsa, kartochkani biroz ajratish */
+.ielts-reading-q-card.answered {
+    border-left: 4px solid #10b981;
+    /* Yashil chiziq - javob berilganini bildiradi */
+    background-color: #f0fdf4;
+}
+
+/* Dropdown Select Stili */
+.ielts-reading-select {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    background-color: #f9f9f9;
+    font-size: 15px;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.ielts-reading-select:focus {
+    border-color: #2196f3;
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(33, 150, 243, 0.2);
+}
+
+/* Dropdown Select Stili */
+.ielts-reading-select {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    background-color: #f9f9f9;
+    font-size: var(--font-size-16);
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* List of Headings qismi uchun maxsus ramka */
+.ielts-reading-headings-box {
+    background-color: #ffffff;
+    border: 1px solid #d1d9e0;
+    /* Rasmdagi kabi och kulrang chegara */
+    border-radius: 8px;
+    padding: 25px;
+    margin: 20px 0 30px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    /* Yengil soya */
+}
+
+/* "List of Headings" sarlavhasi */
+.headings-title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+    font-family: Arial, sans-serif;
+}
+
+/* Ro'yxat (ul) stili */
+.headings-list {
+    list-style: none;
+    /* Nuqtalarni olib tashlaymiz */
+    padding: 0;
+    margin: 0;
+}
+
+/* Har bir Heading bandi (li) */
+.heading-item {
+    display: flex;
+    margin-bottom: 12px;
+    font-size: var(--font-size-16);
+    line-height: 1.5;
+    color: #1a1a1a;
+    font-family: "Times New Roman", Times, serif;
+    /* IELTS formatiga yaqinroq shrift */
+}
+
+/* Rim raqamlari (i, ii, iii) uchun joy ajratish */
+.heading-item::before {
+    content: "";
+    /* Agar JSON'da raqamlar bo'lsa, bu shart emas */
+}
+
+/* Oxirgi elementdan keyin margin bo'lmasligi uchun */
+.heading-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Select menyusi rasmdagidek ixcham bo'lishi uchun qo'shimcha */
+.ielts-reading-select {
+    width: 160px;
+    /* Rasmdagi kabi qisqa */
+    height: 35px;
+    border: 1px solid #767676;
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-size: var(--font-size-16);
+    background-color: #fff;
+}
+
+.ielts-reading-select:focus {
+    border-color: #2196f3;
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(33, 150, 243, 0.2);
+}
+
 .ielts-reading-questions-pane {
     flex: 1;
     display: flex;
@@ -365,6 +586,7 @@
         box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
     }
 }
+
 
 /* --- EXTREME MOBILE (380px gacha bo'lgan ekranlar uchun maxsus) --- */
 @media (max-width: 380px) {

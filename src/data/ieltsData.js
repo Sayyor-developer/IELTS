@@ -43,79 +43,173 @@ export const ieltsData = {
 
 
     reading: [
-        {
-            id: 'r1',
-            difficulty_level: 1,
-            title: "The Secrets of the Maya Civilization",
-            passage_text: `The Maya civilization was a Mesoamerican civilization developed by the Maya peoples, and noted for its logosyllabic script—the most sophisticated and highly developed writing system in pre-Columbian Americas—as well as for its art, architecture, mathematics, calendar, and astronomical system. 
-The Maya lived in a vast area that encompasses modern-day Guatemala, Belize, southeastern Mexico, and the western parts of Honduras and El Salvador. Contrary to popular belief, the Maya did not disappear. Although their classic cities in the lowlands were abandoned in the 9th century, Maya people still live in the same region today, speaking more than 30 different languages.
-Their agricultural success was based on maize, beans, and squash. They developed advanced irrigation systems to manage water during the dry seasons. However, scholars still debate what caused the collapse of their major cities, with theories ranging from overpopulation and environmental degradation to warfare and severe drought.`,
-            instruction: "Questions 1-13: Choose the correct answer based on the passage.",
-            questions: [
-                { id: 'rq1', question_number: 1, question_text: "What was the most sophisticated system developed by the Maya?", options: ["Logosyllabic script", "Iron smelting", "Steam engines", "Ocean navigation"], correct_answer: "Logosyllabic script" },
-                { id: 'rq2', question_number: 2, question_text: "True or False: The Maya civilization was located in modern-day Europe.", options: ["True", "False"], correct_answer: "False" },
-                { id: 'rq3', question_number: 3, question_text: "Which of the following was NOT a primary crop for the Maya?", options: ["Maize", "Beans", "Squash", "Wheat"], correct_answer: "Wheat" },
-                { id: 'rq4', question_number: 4, question_text: "In which century were the lowland cities abandoned?", options: ["5th century", "9th century", "12th century", "15th century"], correct_answer: "9th century" },
-                { id: 'rq5', question_number: 5, question_text: "True or False: Maya people still live in the region today.", options: ["True", "False"], correct_answer: "True" },
-                { id: 'rq6', question_number: 6, question_text: "How many languages are still spoken by the Maya today?", options: ["None", "More than 30", "Exactly 5", "Only 1"], correct_answer: "More than 30" },
-                { id: 'rq7', question_number: 7, question_text: "What did the Maya use to handle water during dry periods?", options: ["Dams", "Buckets", "Irrigation systems", "Rainwater only"], correct_answer: "Irrigation systems" },
-                { id: 'rq8', question_number: 8, question_text: "Which theory is NOT mentioned as a reason for the collapse?", options: ["Overpopulation", "Severe drought", "Alien invasion", "Warfare"], correct_answer: "Alien invasion" },
-                { id: 'rq9', question_number: 9, question_text: "True or False: The Maya script was logosyllabic.", options: ["True", "False"], correct_answer: "True" },
-                { id: 'rq10', question_number: 10, question_text: "The Maya region includes which modern-day country?", options: ["Guatemala", "Brazil", "Canada", "Egypt"], correct_answer: "Guatemala" },
-                { id: 'rq11', question_number: 11, question_text: "What was the main focus of Maya astronomical systems?", options: ["Stars and calendars", "Finding gold", "Building ships", "Telephones"], correct_answer: "Stars and calendars" },
-                { id: 'rq12', question_number: 12, question_text: "Environmental degradation is a theory for what?", options: ["City growth", "City collapse", "New language", "Better crops"], correct_answer: "City collapse" },
-                { id: 'rq13', question_number: 13, question_text: "True or False: Maya architecture is still studied today.", options: ["True", "False"], correct_answer: "True" }
-            ]
+       {
+    id: 'r_pencil_01',
+    difficulty_level: 2,
+    title: "The History of the Pencil",
+    passage_text: `The history of the pencil starts with a violent thunderstorm. When some particularly ferocious weather struck the Lake District in North West England in the sixteenth century, locals in the village of Borrowdale discovered a large uprooted tree. Underneath the tree lay an unknown black substance which we now know as graphite. When a local farmer tried to use it to mark his sheep, he quickly identified their sheep. However, others quickly realised the potential for using this intriguing substance to write on paper. When it was untreated the material was very soft, which meant that it left messy marks on the page. It took a little while for people to encase it with a thin core of the substance in stiff sheep hides or rope. At this time chemistry was still in its infancy. People searched for a word to describe this increasingly useful substance and came up with plumbago which, in Latin, means ‘act like lead’. Later the name graphite was derived from the Greek word ‘graphein’ meaning ‘to write’. We still call graphite the lead of a pencil even though it is now known that there is no trace of real lead in graphite.
+Graphite has a very high melting point at around 3,500 degrees Celsius. This made it invaluable to the British army and navy as a secret ingredient in the manufacture of cannon balls. The Royal Ordnance, or department of the British government responsible for the supply of weapons, used graphite as a lining inside the moulds for cannon balls, which as a result British could turn out faster and more cheaply than their European rivals. In addition to its value to the armed forces, the government quickly realised the commercial potential of the graphite at Borrowdale, and assumed control.
+The history of the pencil continues with the story of all of the mines there during the sixteenth century. Armed guards accompanied the precious graphite all the way down to the metal foundries by the naval shipyards in the south of England. The graphite was so valuable that the locals, who called it wadd, started to steal it. As a deterrent, an act of parliament was passed to make it a serious offence punishable by time in prison.
+The Italians originally invented the wooden casing to hold a thin rod of plumbago firmly in place and a process was developed to bake the mixture. The Germans took this technique and developed it further by applying mass production techniques to pencils. At the same time Nicolas-Jacques Conte, a French officer in Napoleon Bonaparte’s army during the late 1700s, developed a method of mixing powdered graphite with clay to make a stronger and more durable pencil. Adding more clay to the mixture helped make the pencil harder, sharper, and more precise in its mark. More graphite helped make a pencil mark that was softer, thicker and darker.
+The varying quality of pencil leads eventually gave rise to a system for categorizing the fineness of the pencil mark. Pencil manufacturers all over the world still use this system, which was developed in Austria. The H stands for the Hardness of the pencil while the B stands for its Blackness. An HB pencil is a standard pencil and a variety of letters and numbers are used to designate different types of lead.
+Significant seams of graphite exist in parts of China which now produce most of the world’s pencils. Interestingly, the Borrowdale mine in the Lake District remains the only significant source of graphite in its near-pure form in the world. Nowadays the highest grade of graphite at Borrowdale is totally exhausted, although other grades can still be found, and England’s pencil industry continues to thrive in the nearby town of Keswick.
+The pencil has turned out to be a remarkably resilient and valuable tool whose use has survived well into our high-tech times, a fact that the story shows. It is sometimes said that the story shows that progress depends upon millions of dollars to invent a pen capable of writing in the zero gravity of space. The astronauts, by contrast, simply equipped their astronauts with good old-fashioned pencils about which there is a popular myth that Americans overlooked the practical advantages of pencils in zero gravity merely fiction. In actual fact, both American and Russian astronauts were equipped with pencils in their respective country’s first space flights. Pencils were chosen for a private company to develop pens capable of writing in zero gravity. In fact, astronauts of every nation now use pens. But no matter - pencils remain in use in every classroom, every planning, building and drawing office, and in every art studio in the world. And there is nothing to suggest that we are about to use anything better than graphite to use in our pencils.`,
+    instruction: "Questions 1-13: Choose the correct answer based on the passage or identify if the statement is True/False.",
+    questions: [
+        { 
+            id: 'pq1', 
+            question_number: 1, 
+            question_text: "Graphite was first found below a _______ blown down in a storm.", 
+            correct_answer: "TREE" 
         },
-        {
-            id: 'r2',
-            difficulty_level: 2,
-            title: "The Psychology of Urban Planning",
-            passage_text: `Urban planning is not just about buildings and roads; it is about how the environment affects the human mind. High-rise buildings and narrow streets can create a sense of confinement, whereas green spaces and open plazas improve mental well-being.
-In the 1960s, architect Jan Gehl began studying how people used public spaces in Copenhagen. He noticed that when cities prioritize cars, social interaction decreases. Conversely, pedestrian-friendly zones encourage people to stop, talk, and engage with their surroundings. 
-Modern 'Smart Cities' use data to optimize traffic flow and energy use. However, some critics argue that an over-reliance on technology can make cities feel sterile and impersonal. The challenge for future planners is to balance technological efficiency with the biological need for nature and social connection.`,
-            instruction: "Questions 14-27: Select the best answer for the urban planning analysis.",
-            questions: [
-                { id: 'rq14', question_number: 14, question_text: "Who studied public spaces in Copenhagen in the 1960s?", options: ["Jan Gehl", "Albert Einstein", "Steve Jobs", "Robert Moses"], correct_answer: "Jan Gehl" },
-                { id: 'rq15', question_number: 15, question_text: "What happens to social interaction when cities prioritize cars?", options: ["It increases", "It stays the same", "It decreases", "It becomes digital"], correct_answer: "It decreases" },
-                { id: 'rq16', question_number: 16, question_text: "True or False: High-rise buildings can create a sense of confinement.", options: ["True", "False"], correct_answer: "True" },
-                { id: 'rq17', question_number: 17, question_text: "What do pedestrian-friendly zones encourage people to do?", options: ["Drive faster", "Engage with surroundings", "Stay home", "Build more roads"], correct_answer: "Engage with surroundings" },
-                { id: 'rq18', question_number: 18, question_text: "What is a characteristic of 'Smart Cities' mentioned in the text?", options: ["No cars allowed", "Use data to optimize traffic", "Free housing", "Large farms"], correct_answer: "Use data to optimize traffic" },
-                { id: 'rq19', question_number: 19, question_text: "True or False: Critics think technology always makes cities better.", options: ["True", "False"], correct_answer: "False" },
-                { id: 'rq20', question_number: 20, question_text: "What biological need must planners balance with technology?", options: ["The need for speed", "Social connection and nature", "The need for metal", "The need for electricity"], correct_answer: "Social connection and nature" },
-                { id: 'rq21', question_number: 21, question_text: "According to the text, narrow streets can affect what?", options: ["Car engine life", "The human mind", "Internet speed", "Water quality"], correct_answer: "The human mind" },
-                { id: 'rq22', question_number: 22, question_text: "Copenhagen was the site of which researcher's work?", options: ["Jan Gehl", "Plato", "Newton", "Tesla"], correct_answer: "Jan Gehl" },
-                { id: 'rq23', question_number: 23, question_text: "True or False: Urban planning is only about roads.", options: ["True", "False"], correct_answer: "False" },
-                { id: 'rq24', question_number: 24, question_text: "What does 'sterile' city mean in this context?", options: ["Very clean", "Impersonal and cold", "Full of hospitals", "No traffic"], correct_answer: "Impersonal and cold" },
-                { id: 'rq25', question_number: 25, question_text: "Open plazas are mentioned to improve what?", options: ["Mental well-being", "Shopping rates", "Car parking", "Building height"], correct_answer: "Mental well-being" },
-                { id: 'rq26', question_number: 26, question_text: "What decade did Gehl start his studies?", options: ["1920s", "1960s", "1990s", "2010s"], correct_answer: "1960s" },
-                { id: 'rq27', question_number: 27, question_text: "True or False: Smart cities use data for energy use.", options: ["True", "False"], correct_answer: "True" }
-            ]
+        { 
+            id: 'pq2', 
+            question_number: 2, 
+            question_text: "The first use of graphite was to make marks on _______.", 
+            correct_answer: "SHEEP" 
         },
-        {
-            id: 'r3',
-            difficulty_level: 3,
-            title: "Bioluminescence: Nature’s Cold Light",
-            passage_text: `Bioluminescence is the production and emission of light by a living organism. It occurs widely in marine vertebrates and invertebrates, as well as in some fungi and terrestrial insects such as fireflies. 
-The chemical reaction that results in bioluminescence requires two unique chemicals: luciferin and either luciferase or photoprotein. Luciferin is the compound that actually produces the light. The color of the light depends on the specific arrangement of luciferin molecules.
-Organisms use this ability for various survival strategies. For example, the deep-sea anglerfish uses a glowing lure to attract prey, while some species of squid use 'counter-illumination' to camouflage themselves against the sunlight coming from above. In the medical field, bioluminescence is being used to track the spread of diseases and monitor cellular processes in real-time.`,
-            instruction: "Questions 28-40: Scientific analysis questions.",
-            questions: [
-                { id: 'rq28', question_number: 28, question_text: "What is bioluminescence primarily?", options: ["Reflected sunlight", "Light produced by organisms", "Heat from the ocean", "Electricity from rocks"], correct_answer: "Light produced by organisms" },
-                { id: 'rq29', question_number: 29, question_text: "Where is bioluminescence widely found?", options: ["Outer space", "Marine vertebrates", "Only in deserts", "In volcanoes"], correct_answer: "Marine vertebrates" },
-                { id: 'rq30', question_number: 30, question_text: "Which chemical actually produces the light?", options: ["Luciferase", "Luciferin", "Hydrogen", "Carbon"], correct_answer: "Luciferin" },
-                { id: 'rq31', question_number: 31, question_text: "True or False: Luciferin requires a photoprotein or luciferase to work.", options: ["True", "False"], correct_answer: "True" },
-                { id: 'rq32', question_number: 32, question_text: "What determines the color of the light?", options: ["Water temperature", "Luciferin molecule arrangement", "The depth of the sea", "The size of the animal"], correct_answer: "Luciferin molecule arrangement" },
-                { id: 'rq33', question_number: 33, question_text: "How does the deep-sea anglerfish use light?", options: ["To scare prey", "To attract prey", "To find a home", "To sleep"], correct_answer: "To attract prey" },
-                { id: 'rq34', question_number: 34, question_text: "True or False: Some squid use light for camouflage.", options: ["True", "False"], correct_answer: "True" },
-                { id: 'rq35', question_number: 35, question_text: "What is 'counter-illumination'?", options: ["Turning off light", "Using light to hide against sunlight", "Fighting with light", "Heating the water"], correct_answer: "Using light to hide against sunlight" },
-                { id: 'rq36', question_number: 36, question_text: "How is bioluminescence used in medicine?", options: ["To cure blindness", "To track disease spread", "To perform surgery", "To clean hospitals"], correct_answer: "To track disease spread" },
-                { id: 'rq37', question_number: 37, question_text: "True or False: Fireflies are terrestrial insects that use bioluminescence.", options: ["True", "False"], correct_answer: "True" },
-                { id: 'rq38', question_number: 38, question_text: "Which organism is NOT mentioned as using bioluminescence?", options: ["Squid", "Fireflies", "Anglerfish", "Lions"], correct_answer: "Lions" },
-                { id: 'rq39', question_number: 39, question_text: "What chemical reaction result is bioluminescence?", options: ["Cold light", "Hot fire", "Smoke", "Ice"], correct_answer: "Cold light" },
-                { id: 'rq40', question_number: 40, question_text: "True or False: Bioluminescence can monitor cellular processes.", options: ["True", "False"], correct_answer: "True" }
-            ]
+        { 
+            id: 'pq3', 
+            question_number: 3, 
+            question_text: "The characteristics of raw graphite: dirty to use because it is so _______.", 
+            correct_answer: "SOFT" 
+        },
+        { 
+            id: 'pq4', 
+            question_number: 4, 
+            question_text: "Originally wrapped in _______ or animal skin to make it useable as a pencil.", 
+            correct_answer: "ROPE" 
+        },
+        { 
+            id: 'pq5', 
+            question_number: 5, 
+            question_text: "The government completely took over the _______ at Borrowdale.", 
+            correct_answer: "MINES" 
+        },
+        { 
+            id: 'pq6', 
+            question_number: 6, 
+            question_text: "Local people began to _______ graphite for the money involved.", 
+            correct_answer: "STEAL" 
+        },
+
+        // 2-QISM: TRUE / FALSE / NOT GIVEN
+        { 
+            id: 'pq7', 
+            question_number: 7, 
+            question_text: "The Italians were the first to make pencils out of wood.", 
+            options: ["TRUE", "FALSE", "NOT GIVEN"], 
+            correct_answer: "TRUE" 
+        },
+        { 
+            id: 'pq8', 
+            question_number: 8, 
+            question_text: "The Germans used different types of wood to produce pencils.", 
+            options: ["TRUE", "FALSE", "NOT GIVEN"], 
+            correct_answer: "NOT GIVEN" 
+        },
+        { 
+            id: 'pq9', 
+            question_number: 9, 
+            question_text: "More clay in a pencil makes it write more darkly.", 
+            options: ["TRUE", "FALSE", "NOT GIVEN"], 
+            correct_answer: "FALSE" 
+        },
+        { 
+            id: 'pq10', 
+            question_number: 10, 
+            question_text: "After the HB code was introduced, it very quickly became used by all manufacturers.", 
+            options: ["TRUE", "FALSE", "NOT GIVEN"], 
+            correct_answer: "NOT GIVEN" 
+        },
+        { 
+            id: 'pq11', 
+            question_number: 11, 
+            question_text: "English pencil factories have now all closed down.", 
+            options: ["TRUE", "FALSE", "NOT GIVEN"], 
+            correct_answer: "FALSE" 
+        },
+        { 
+            id: 'pq12', 
+            question_number: 12, 
+            question_text: "American astronauts used pencils on their early journeys into space.", 
+            options: ["TRUE", "FALSE", "NOT GIVEN"], 
+            correct_answer: "TRUE" 
+        },
+        { 
+            id: 'pq13', 
+            question_number: 13, 
+            question_text: "The use of graphite pencils is unlikely to continue into the future.", 
+            options: ["TRUE", "FALSE", "NOT GIVEN"], 
+            correct_answer: "FALSE" 
         }
+    ]
+},
+        {
+    "id": "r2",
+    "difficulty_level": 2,
+    "title": "Corporate Social Responsibility",
+    "passage_text": "A) Broadly speaking, proponents of CSR have used four arguments to make their case: moral obligation, sustainability, license to operate, and reputation. The moral appeal — arguing that companies have a duty to be good citizens and to “do the right thing” — is prominent in the goal of Business for Social Responsibility, the leading nonprofit CSR business association in the United States. It asks that its members “achieve commercial success in ways that honor ethical values and respect people, communities, and the natural environment.” Sustainability emphasizes environmental and community stewardship. An excellent definition was developed in the 1980s by Norwegian Prime Minister Gro Harlem Brundtland and used by the World Business Council for Sustainable Development: “Meeting the needs of the present without compromising the ability of future generations to meet their own needs.” The notion of license to operate derives from the fact that every company needs tacit or explicit permission from governments, communities, and numerous other stakeholders to do business. Finally, reputation is used by many companies to justify CSR initiatives on the grounds that they will improve a company’s image, strengthen its brand, enliven morale, and even raise the value of its stock.\n\nB) To advance CSR, we must root it in a broad understanding of the interrelationship between a corporation and society while at the same time anchoring it in the strategies and activities of specific companies. To say broadly that business and society need each other might seem like a cliché, but it is also the basic truth that will pull companies out of the muddle that their current corporate-responsibility thinking has created. Successful corporations need a healthy society. Education, health care, and equal opportunity are essential to a productive workforce. Safe products and working conditions not only attract customers but lower the internal costs of accidents. Efficient utilization of land, water, energy, and other natural resources makes business more productive. Good government, the rule of law, and property rights are essential for efficiency and innovation. Strong regulatory standards protect both consumers and competitive companies from exploitation. Ultimately, a healthy society creates expanding demand for business, as more human needs are met and aspirations grow. Any business that pursues its ends at the expense of the society in which it operates will find its success to be illusory and ultimately temporary. At the same time, a healthy society needs successful companies. No social program can rival the business sector when it comes to creating the jobs, wealth, and innovation that improve standards of living and social conditions over time.\n\nC) A company’s impact on society also changes over time, as social standards evolve and science progresses. Asbestos, now understood as a serious health risk, was thought to be safe in the early 1900s, given the scientific knowledge then available. Evidence of its risks gradually mounted for more than 50 years before any company was held liable for the harms it can cause. Many firms that failed to anticipate the consequences of this evolving body of research have been bankrupted by the results. No longer can companies be content to monitor only the obvious social impacts of today. Without a careful process for identifying evolving social effects of tomorrow, firms may risk their very survival.\n\nD) No business can solve all of society’s problems or bear the cost of doing so. Instead, each company must select issues that intersect with its particular business. Other social agendas are best left to those companies in other industries, NGOs, or government institutions that are better positioned to address them. The essential test that should guide CSR is not whether a cause is worthy but whether it presents an opportunity to create shared value — that is, a meaningful benefit for society that is also valuable to the business. Corporations are not responsible for all the world’s problems, nor do they have the resources to solve them all. Each company can identify the particular set of societal problems that it is best equipped to help resolve and from which it can gain the greatest competitive benefit. Addressing social issues by creating shared value will lead to self-sustaining solutions that do not depend on private or government subsidies. When a well-run business applies its vast resources, expertise, and management talent to problems that it understands and in which it has a stake, it can have a greater impact on social good than any other institution or philanthropic organization.\n\nE) The best corporate citizenship initiatives involve far more than writing a check: they specify clear, measurable goals and track results over time. A good example is GE’s program to adopt underperforming public high schools near several of its major U.S. facilities. The company contributes between $250,000 and $1 million over a five-year period to each school and makes in-kind donations as well. GE managers and employees take an active role by working with school administrators to assess needs and mentor or tutor students. In an independent study of ten schools in the program between 1989 and 1999, nearly all showed significant improvement, while the graduation rate in four of the five worst-performing schools doubled from an average of 30% to 60%. Effective corporate citizenship initiatives such as this one create goodwill and improve relations with local governments and other important constituencies. What’s more, GE’s employees feel great pride in their participation. Their effect is inherently limited, however. No matter how beneficial the program is, it remains incidental to the company’s business, and the direct effect on GE’s recruiting and retention is modest.\n\nF) Microsoft’s Working Connections partnership with the American Association of Community Colleges (AACC) is a good example of a shared-value opportunity arising from investments in context. The shortage of information technology workers is a significant constraint on Microsoft’s growth; currently, there are more than 450,000 unfilled IT positions in the United States alone. Community colleges, with an enrollment of 11.6 million students, representing 45% of all U.S. undergraduates, could be a major solution. Microsoft recognizes, however, that community colleges face special challenges: IT curricula are not standardized, technology used in classrooms is often outdated, and there are no systematic professional development programs to keep faculty up to date. Microsoft’s $50 million five-year initiative was aimed at all three problems. In addition to contributing money and products, Microsoft sent employee volunteers to colleges to assess needs, contribute to curriculum development, and create faculty development institutes. Note that in this case, volunteers and assigned staff were able to use their core professional skills to address a social need, a far cry from typical volunteer programs. Microsoft has achieved results that have benefited many communities while having a direct — and potentially significant — impact on the company.\n\nG) At the heart of any strategy is a unique value proposition: a set of needs a company can meet for its chosen customers that others cannot. The most strategic CSR occurs when a company adds a social dimension to its value proposition, making social impact integral to the overall strategy. Consider Whole Foods Market, whose value proposition is to sell organic, natural and healthy food products to customers who are passionate about food and the environment. The company’s sourcing emphasizes purchases from local farmers through each store’s procurement process. Buyers screen out foods containing any of nearly 100 common ingredients that the company considers unhealthy or environmentally damaging. The same standards apply to products made internally. Whole Foods’ commitment to natural and environmentally friendly operating practices extends well beyond sourcing. Stores are constructed using a minimum of virgin raw materials. Recently, the company purchased renewable wind energy credits equal to 100% of its electricity use in all of its stores and facilities, the only Fortune 500 company to offset its electricity consumption entirely. Spoiled produce and biodegradable waste are trucked to regional centers for composting. Whole Foods’ vehicles are being converted to run on biofuels. Even the cleaning products used in its stores are environmentally friendly. And through its philanthropy, the company has created the Animal Compassion Foundation to develop more natural and humane ways of raising farm animals. In short, nearly every aspect of the company’s value chain reinforces the social dimensions of its value proposition, distinguishing Whole Foods from its competitors.",
+    "instruction": "Questions 14–20: Choose the correct heading for paragraphs A–G from the list below. Questions 21–22: Choose NO MORE THAN TWO WORDS from the passage. Questions 23–26: Match each statement with the correct company.",
+    "list_of_headings": [
+      "i How CSR may help one business to expand",
+      "ii CSR in many aspects of a company’s business",
+      "iii A CSR initiative without a financial gain",
+      "iv Lack of action by the state of social issues",
+      "v Drives or pressures motivate companies to address CSR",
+      "vi The past illustrates businesses are responsible for future outcomes",
+      "vii Companies applying CSR should be selective",
+      "viii Reasons that business and society benefit each other"
+    ],
+    "questions": [
+      { "id": "q14", "question_number": 14, "question_text": "Paragraph A", "options": ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii"], "correct_answer": "v" },
+      { "id": "q15", "question_number": 15, "question_text": "Paragraph B", "options": ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii"], "correct_answer": "viii" },
+      { "id": "q16", "question_number": 16, "question_text": "Paragraph C", "options": ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii"], "correct_answer": "vi" },
+      { "id": "q17", "question_number": 17, "question_text": "Paragraph D", "options": ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii"], "correct_answer": "vii" },
+      { "id": "q18", "question_number": 18, "question_text": "Paragraph E", "options": ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii"], "correct_answer": "iii" },
+      { "id": "q19", "question_number": 19, "question_text": "Paragraph F", "options": ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii"], "correct_answer": "i" },
+      { "id": "q20", "question_number": 20, "question_text": "Paragraph G", "options": ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii"], "correct_answer": "ii" },
+      { "id": "q21", "question_number": 21, "question_text": "Corporations’ workers’ productivity generally needs health care, education, and given ________.", "options": [], "correct_answer": "equal opportunity" },
+      { "id": "q22", "question_number": 22, "question_text": "Improvement of the safety standard can reduce the ________ of accidents in the workplace.", "options": [], "correct_answer": "internal costs" },
+      { "id": "q23", "question_number": 23, "question_text": "The disposable waste (Which company handles this?)", "options": ["A General Electronics", "B Microsoft", "C Whole Foods Market"], "correct_answer": "C Whole Foods Market" },
+      { "id": "q24", "question_number": 24, "question_text": "The way company purchases its goods", "options": ["A General Electronics", "B Microsoft", "C Whole Foods Market"], "correct_answer": "C Whole Foods Market" },
+      { "id": "q25", "question_number": 25, "question_text": "Helping the underperforming", "options": ["A General Electronics", "B Microsoft", "C Whole Foods Market"], "correct_answer": "A General Electronics" },
+      { "id": "q26", "question_number": 26, "question_text": "Ensuring the people have the latest information", "options": ["A General Electronics", "B Microsoft", "C Whole Foods Market"], "correct_answer": "B Microsoft" }
+    ]
+  },
+       {
+  "id": "r3",
+  "difficulty_level": 3,
+  "title": "The Voynich Manuscript",
+  "passage_text": "The starkly modern Beinecke Library at Yale University is home to some of the most valuable books in the world: first folios of Shakespeare, Gutenberg Bibles and manuscripts from the early Middle Ages. Yet the library’s most controversial possession is an unprepossessing vellum manuscript about the size of a hardback book, containing 240-odd pages of drawings and text of unknown age and authorship. Catalogued as MS408, the manuscript would attract little attention were it not for the fact that the drawings hint at esoteric knowledge, while the text seems to be some sort of code — one that no-one has been able to break. It’s known to scholars as the Voynich manuscript, after the American book dealer Wilfrid Voynich, who bought the manuscript from a Jesuit college in Italy in 1912.\n\nOver the years, the manuscript has attracted the attention of everyone from amateur dabblers to top codebreakers, all determined to succeed where countless others have failed. Academic research papers, books and websites are devoted to making sense of the contents of the manuscript, which are freely available to all. “Most other mysteries involve second-hand reports,” says Dr Gordon Rugg of Keele University, a leading Voynich expert. “But this is one that you can see for yourself.”\n\nIt is certainly strange: page after page of drawings of weird plants, astrological symbolism and human figures, accompanied by a script that looks like some form of shorthand. What does it say — and what are the drawings about? Voynich himself believed that the manuscript was the work of the 13th-century English monk Roger Bacon, famed for his knowledge of alchemy, philosophy and science. In 1921 Voynich’s view that Bacon was the writer appeared to win support from the work of William Newbold, Professor of Philosophy at the University of Pennsylvania, who claimed to have found the key to the cipher system used by Bacon. According to Newbold, the manuscript proved that Bacon had access to a microscope centuries before they were supposedly first invented. The claim that this medieval monk had observed living cells created a sensation. It soon became clear, however, that Newbold had fallen victim to wishful thinking. Other scholars showed that his “decoding” methods produced a host of possible interpretations.\n\nThe Voynich manuscript has continued to defy the efforts of world-class experts. In 1944, a team was assembled to tackle the mystery, led by William Friedman, the renowned American codebreaker. They began with the most basic codebreaking task: analysing the relative frequencies of the characters making up the text, looking for signs of an underlying structure. Yet Friedman’s team soon found themselves in deep water. The precise size of the “alphabet” of the Voynich manuscript was unclear: it’s possible to make out more than 70 distinct symbols among the 170,000-character text. Furthermore, Friedman discovered that some words and phrases appeared more often than expected in a standard language, casting doubt on claims that the manuscript concealed a real language, as encryption typically reduces word frequencies.\n\nFriedman concluded that the most plausible resolution of this paradox was that “Voynichese” is some sort of specially created artificial language, whose words are devised from concepts, rather than linguistics. So could the Voynich manuscript be the earliest-known example of artificial language? “Friedman’s hypothesis commands respect because of the lifetime of cryptanalytical expertise he brought to bear,” says Rob Churchill, co-author of The Voynich Manuscript. That still leaves a host of questions unanswered, however, such as the identity of the author and the meaning of the bizarre drawings. “It does little to advance our understanding of the manuscript as a whole,” says Churchill.\n\nEven though Friedman was working more than 60 years ago, he suspected that major insights would come from using the device that had already transformed codebreaking: the computer. In this he was right — it is now the key tool for uncovering clues about the manuscript’s language.\n\nThe insights so far have been perplexing. For example, in 2001 another leading Voynich scholar, Dr Gabriel Landini of Birmingham University in the UK, published the results of his study of the manuscript using a pattern-detecting method called spectral analysis. This revealed evidence that the manuscript contains genuine words, rather than random nonsense, consistent with the existence of some underlying natural language. Yet the following year, Voynich expert René Zandbergen of the European Space Agency in Darmstadt, Germany showed that the entropy of the text (a measure of the rate of transfer of information) was consistent with Friedman’s suspicions that an artificial language had been used.\n\nMany are convinced that the Voynich manuscript isn’t a hoax. For how could a medieval hoaxer create so many telltale signs of a message from random nonsense? Yet even this has been challenged in new research by Rugg. Using a system, first published by the Italian mathematician Girolamo Cardano in 1550, in which a specially constructed grille is used to pick out symbols from a table, Rugg found he could rapidly generate text with many of the basic traits of the Voynich manuscript. Publishing his results in 2004, Rugg stresses that he hadn’t set out to prove the manuscript a hoax. “I simply demonstrated that it’s feasible to hoax something this complex in a few months,” he says.\n\nInevitably, others beg to differ. Some scholars, such as Zandbergen, still suspect the text has genuine meaning, though believe it may never be decipherable. Others, such as Churchill, have suggested that the sheer weirdness of the illustrations and text hint at an author who had lost touch with reality.\n\nWhat is clear is that the book-sized manuscript kept under lock and key at Yale University has lost none of its fascination. “Many derive great intellectual pleasure from solving puzzles,” says Rugg. “The Voynich manuscript is as challenging a puzzle as anyone could ask for.”",
+  "instruction": "Questions 27–40: Read the text and answer the questions following the specific instructions for each set.",
+  "list_of_headings": [
+    "A Gordon Rugg",
+    "B Roger Bacon",
+    "C William Newbold",
+    "D William Friedman",
+    "E Rob Churchill",
+    "F Gabriel Landini",
+    "G René Zandbergen",
+    "H Girolamo Cardano"
+  ],
+  "questions": [
+    { "id": "q27", "question_number": 27, "question_text": "It is uncertain when the Voynich manuscript was written.", "options": ["TRUE", "FALSE", "NOT GIVEN"], "correct_answer": "TRUE" },
+    { "id": "q28", "question_number": 28, "question_text": "Wilfrid Voynich donated the manuscript to the Beinecke Library.", "options": ["TRUE", "FALSE", "NOT GIVEN"], "correct_answer": "FALSE" },
+    { "id": "q29", "question_number": 29, "question_text": "Interest in the Voynich manuscript extends beyond that of academics and professional codebreakers.", "options": ["TRUE", "FALSE", "NOT GIVEN"], "correct_answer": "TRUE" },
+    { "id": "q30", "question_number": 30, "question_text": "The text of the Voynich manuscript contains just under 70 symbols.", "options": ["TRUE", "FALSE", "NOT GIVEN"], "correct_answer": "FALSE" },
+    { "id": "q31", "question_number": 31, "question_text": "The number of times that some words occur makes it unlikely that the manuscript is based on an authentic language.", "options": ["A", "B", "C", "D", "E", "F", "G", "H"], "correct_answer": "D" },
+    { "id": "q32", "question_number": 32, "question_text": "Unlike some other similar objects of fascination, people can gain direct access to the Voynich manuscript.", "options": ["A", "B", "C", "D", "E", "F", "G", "H"], "correct_answer": "A" },
+    { "id": "q33", "question_number": 33, "question_text": "The person who wrote the manuscript may not have been entirely sane.", "options": ["A", "B", "C", "D", "E", "F", "G", "H"], "correct_answer": "E" },
+    { "id": "q34", "question_number": 34, "question_text": "It is likely that the author of the manuscript is the same person as suggested by Wilfrid Voynich.", "options": ["A", "B", "C", "D", "E", "F", "G", "H"], "correct_answer": "C" },
+    { "id": "q35", "question_number": 35, "question_text": "William Newbold believed that the author of the Voynich manuscript had been able to look at cells through a:", "options": [], "correct_answer": "microscope" },
+    { "id": "q36", "question_number": 36, "question_text": "William Friedman concluded that the manuscript was written in an artificial language that was based on:", "options": [], "correct_answer": "concepts" },
+    { "id": "q37", "question_number": 37, "question_text": "He couldn’t find out the meaning of this language but he believed that the ________ would continue to bring advances in codebreaking.", "options": [], "correct_answer": "computer" },
+    { "id": "q38", "question_number": 38, "question_text": "Dr Gabriel Landini used a system known as ________ in his research.", "options": [], "correct_answer": "spectral analysis" },
+    { "id": "q39", "question_number": 39, "question_text": "Dr Gordon Rugg’s system involved a grille that made it possible to quickly select symbols that appeared in a:", "options": [], "correct_answer": "table" },
+    { "id": "q40", "question_number": 40, "question_text": "The writer’s main aim in this passage is to:", "options": ["A explain the meaning", "B determine the true identity", "C describe the numerous attempts to decode", "D identify media coverage"], "correct_answer": "C" }
+  ]
+}
     ]
     ,
 
@@ -320,22 +414,21 @@ Organisms use this ability for various survival strategies. For example, the dee
       part: 1,
       title: "Introduction and Interview",
       questions: [
-        "Let's talk about your home town. Where is it?",
         "What do you like about your home town?",
-        "Is it a good place for young people to live?"
       ]
     },
     {
       id: "s2",
       part: 2,
-      title: "Cue Card (Long Turn)",
-      instruction: "Describe a beautiful place you have visited. You should say:",
-      points: [
-        "Where it is",
-        "When you went there",
-        "Who you went with",
-        "And explain why you think it is beautiful."
-      ]
+      title: "Part 2: Beautiful Place",
+      question: "Describe a beautiful place you have visited."
+    },
+     {
+      id: "s3",
+      part: 3,
+      title: "Part 3: Tourism & Environment",
+     question: "Do you think tourism always benefits the environment?",
+        
     }
   ]
 };

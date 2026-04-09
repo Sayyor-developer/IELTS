@@ -24,8 +24,8 @@
 }
 
 .sp-indicator {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: var(--font-size-12);
+    font-weight: var(--font-weight-700);
     padding: 4px 12px;
     border-radius: 20px;
     background: #334155;
@@ -55,13 +55,13 @@
 
 .sp-badge {
     color: #2563eb;
-    font-weight: 700;
-    font-size: 14px;
+    font-weight: var(--font-weight-700);
+    font-size: var(--font-size-14);
 }
 
 .sp-title {
     margin: 10px 0 30px;
-    font-size: 28px;
+    font-size: var(--font-size-25);
     color: #0f172a;
 }
 
@@ -75,13 +75,13 @@
     display: flex;
     gap: 15px;
     margin-bottom: 20px;
-    font-size: 18px;
+    font-size: var(--font-size-18);
     color: #334155;
 }
 
 .q-num {
     color: #2563eb;
-    font-weight: 900;
+    font-weight: var(--font-weight-900);
 }
 
 /* O'ng tomondagi panel */
@@ -114,14 +114,14 @@
 }
 
 .sp-time-val {
-    font-size: 40px;
-    font-weight: 200;
+    font-size: var(--font-size-25);
+    font-weight: var(--font-weight-200);
     color: #0f172a;
 }
 
 .sp-time-label {
-    font-size: 10px;
-    font-weight: 700;
+    font-size: var(--font-size-12);
+    font-weight: var(--font-weight-700);
     color: #94a3b8;
 }
 
@@ -130,8 +130,8 @@
     padding: 16px;
     border-radius: 14px;
     border: none;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: var(--font-size-18);
+    font-weight: var(--font-weight-600);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -158,8 +158,135 @@
     color: white;
     border: none;
     border-radius: 12px;
-    font-weight: 700;
+    font-weight: var(--font-weight-700);
     cursor: pointer;
+}
+
+/* --- MODAL DIZAYNI --- */
+.analysis-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    /* Glassmorphism effekti */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.analysis-modal {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.analysis-modal h2 {
+    font-size: var(--font-size-25);
+    color: #0f172a;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: var(--font-weight-800);
+    letter-spacing: -0.5px;
+}
+
+.modal-scroll-area {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.sample-box {
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.sample-box.t1 {
+    background: #f0f9ff;
+    border-color: #bae6fd;
+}
+
+.sample-box.t2 {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+}
+
+.sample-box h4 {
+    font-size: var(--font-size-18);
+    margin-bottom: 10px;
+    font-weight: var(--font-weight-700);
+}
+
+.sample-box.t1 h4 {
+    color: #0369a1;
+}
+
+.sample-box.t2 h4 {
+    color: #15803d;
+}
+
+.sample-inner {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    font-style: italic;
+    line-height: 1.6;
+    color: #334155;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.finish-btn {
+    width: 100%;
+    padding: 16px;
+    background: #0f172a;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: var(--font-size-18);
+    font-weight: var(--font-weight-700);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.finish-btn:hover {
+    background: #1e293b;
+    transform: translateY(-2px);
+}
+
+/* Custom Scrollbar */
+.modal-scroll-area::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-scroll-area::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
 }
 
 /* Responsive 380px */

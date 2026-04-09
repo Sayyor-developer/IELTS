@@ -1,11 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './cefrspeaking.css';
 
+// CEFR Speaking namunaviy javoblar (B2/C1)
+const speakingSamples = [
+  {
+    part: "Part 1",
+    title: "Introduction",
+    sample: "I currently reside in Samarkand, a city steeped in history. It's renowned for its stunning architectural heritage, like the Registan Square, but what I love most is the seamless blend of ancient traditions with a rapidly developing modern infrastructure.",
+  },
+  {
+    part: "Part 2",
+    title: "Cue Card",
+    sample: "Last summer, I embarked on a journey to the Zaamin mountains by car. What rendered this trip truly memorable wasn't just the breathtaking alpine scenery, but the opportunity to disconnect from the digital world and bond with my closest friends in such a serene environment.",
+  },
+  {
+    part: "Part 3",
+    title: "Discussion",
+    sample: "In my view, travel habits have undergone a radical transformation due to technological advancements. While high-speed trains have made domestic travel incredibly efficient, we must also address the environmental impact that increased tourism brings to fragile ecosystems.",
+  }
+];
+
 const CefrSpeaking = ({ data, onComplete }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
   const [timer, setTimer] = useState(0);
   const [recordings, setRecordings] = useState({});
+  const [showFinalModal, setShowFinalModal] = useState(false);
   
   const mediaRecorder = useRef(null);
   const audioChunks = useRef([]);
@@ -23,17 +43,14 @@ const CefrSpeaking = ({ data, onComplete }) => {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       mediaRecorder.current = new MediaRecorder(stream);
       audioChunks.current = [];
-
       mediaRecorder.current.ondataavailable = (e) => {
         if (e.data.size > 0) audioChunks.current.push(e.data);
       };
-
       mediaRecorder.current.onstop = () => {
         const audioBlob = new Blob(audioChunks.current, { type: 'audio/webm' });
         setRecordings(prev => ({ ...prev, [currentTask.id]: URL.createObjectURL(audioBlob) }));
         stream.getTracks().forEach(track => track.stop());
       };
-
       mediaRecorder.current.start();
       setIsRecording(true);
       setTimer(0);
@@ -57,7 +74,7 @@ const CefrSpeaking = ({ data, onComplete }) => {
       setCurrentStep(s => s + 1);
       setTimer(0);
     } else {
-      onComplete(recordings);
+      setShowFinalModal(true);
     }
   };
 
@@ -75,17 +92,18 @@ const CefrSpeaking = ({ data, onComplete }) => {
       </nav>
 
       <div className="sp-body">
-        {/* CHAP TOMON: Savollar */}
         <div className="sp-left-panel">
           <div className="panel-content">
             <span className="sp-badge">{currentTask.part}</span>
             <h1 className="sp-title">{currentTask.title}</h1>
+            
             <div className="sp-questions-box">
               {currentTask.questions ? (
                 <ul className="sp-q-list">
                   {currentTask.questions.map((q, i) => (
                     <li key={i} className="sp-q-item">
-                      <span className="q-num">{i + 1}</span>
+                      {/* Sening so'ragan qisming: Savol raqami Step bo'yicha */}
+                      <span className="q-num">{currentStep + 1}</span>
                       <p>{q}</p>
                     </li>
                   ))}
@@ -99,7 +117,6 @@ const CefrSpeaking = ({ data, onComplete }) => {
           </div>
         </div>
 
-        {/* O'NG TOMON: Mikrofon va Taymer */}
         <div className="sp-right-panel">
           <div className="sp-control-card">
             <div className="sp-timer-circle">
@@ -134,6 +151,26 @@ const CefrSpeaking = ({ data, onComplete }) => {
           </div>
         </div>
       </div>
+
+      {/* FINAL MODAL */}
+      {showFinalModal && (
+        <div className="analysis-modal-overlay">
+          <div className="analysis-modal">
+            <h2>CEFR Speaking: Model Answers</h2>
+            <div className="modal-scroll-area">
+              {speakingSamples.map((item, index) => (
+                <div key={index} className={`sample-box ${index % 2 === 0 ? 't1' : 't2'}`}>
+                  <h4>{item.part}: {item.title}</h4>
+                  <p className="sample-inner">"{item.sample}"</p>
+                </div>
+              ))}
+            </div>
+            <button className="finish-btn" onClick={() => onComplete(recordings)}>
+              Exit and Save Result
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
