@@ -162,9 +162,7 @@ const Exam = () => {
           </span>   
         </div>
         <div className="right-side">
-          <button className="next-section-btn" onClick={handleNextSection}>
-            {activeSectionIndex < 3 ? 'Next Section →' : 'Finish Test'}
-          </button>
+         
         </div>
       </div>
 

@@ -12,7 +12,7 @@ const Login = ({ onLoginSuccess }) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (username === 'IELTS' && password === 'ielts12345') {
+    if (username === 'Sayyor' && password === 'sayyor12345') {
       const userData = { username, role: 'student' };
       onLoginSuccess(userData); 
       toast.success("Xush kelibsiz!");
